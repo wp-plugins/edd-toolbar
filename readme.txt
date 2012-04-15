@@ -18,7 +18,7 @@ This **small and lightweight plugin extension** just adds a lot [Easy Digital Do
 * Access your stuff from one place in the toolbar on backend and frontend, without much scrolling... in other words: manage your digital downloads even more easily :-)
 * Alternate main Icon with 11 additional colored/alternate icons included :) (changeable via filters)
 * Plus 4 filters included to change wording/tooltip and icon of the main item - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
-* For custom "branding" or special needs a few sections like "Extensions" and "Resource links group" could be hidden from displaying via your active child theme/skin - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
+* For custom "branding" or special needs a few sections like the "Resource links group" could be hidden from displaying via your active theme/child theme - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
 * Supporting all official *Easy Digital Downloads* sites, so just the whole ecosystem for this plugin :)
 * Fully internationalized! Real-life tested and developed with international users in mind!
 * Fully WPML compatible!
