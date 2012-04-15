@@ -1,0 +1,389 @@
+# This German Language File: Copyright (C) 2012 by David Decker of deckerweb.de & genesisthemes.de
+# This file is distributed under the same license as the Easy Digital Downloads Toolbar Plugin package.
+#
+# Weitere deutsche Sprachdateien fuer Easy Digital Downloads und Erweiterungen
+# sowie WordPress-Plugins und -Themes sind hier zu finden:
+# --> http://deckerweb.de/sprachdateien/
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Digital Downloads Toolbar\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tags/edd-toolbar?forum_id=10\n"
+"POT-Creation-Date: 2012-04-14 01:20+0200\n"
+"PO-Revision-Date: 2012-04-15 15:59+0100\n"
+"Last-Translator: David Decker <deckerweb.mobil@googlemail.com>\n"
+"Language-Team: DECKERWEB <deckerweb.mobil@googlemail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#@ edd-toolbar
+#. translators: plugin header field 'Name'
+#: edd-toolbar.php:0
+msgid "Easy Digital Downloads Toolbar"
+msgstr "Easy Digital Downloads Werkzeugleiste"
+
+#@ edd-toolbar
+#. translators: plugin header field 'PluginURI'
+#: edd-toolbar.php:0
+msgid "http://genesisthemes.de/en/wp-plugins/edd-toolbar/"
+msgstr "http://genesisthemes.de/plugins/edd-toolbar/"
+
+#@ edd-toolbar
+#. translators: plugin header field 'Author'
+#: edd-toolbar.php:0
+msgid "David Decker - DECKERWEB"
+msgstr "David Decker - DECKERWEB.de"
+
+#@ edd-toolbar
+#. translators: plugin header field 'AuthorURI'
+#: edd-toolbar.php:0
+msgid "http://deckerweb.de/"
+msgstr "http://deckerweb.de/"
+
+#@ edd-toolbar
+#. translators: plugin header field 'Version'
+#: edd-toolbar.php:0
+msgid "1.0"
+msgstr "1.0"
+
+#@ edd-toolbar
+#: edd-toolbar.php:65
+msgid "FAQ"
+msgstr "FAQ - Häufige Fragen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:66
+msgid "Support"
+msgstr "Hilfe und Unterstützung (Support)"
+
+#@ edd-toolbar
+#: edd-toolbar.php:67
+msgid "http://genesisthemes.de/en/donate/"
+msgstr "http://genesisthemes.de/spenden/"
+
+#@ edd-toolbar
+#: edd-toolbar.php:67
+msgid "Donate"
+msgstr "Spenden"
+
+#@ edd-toolbar
+#: edd-toolbar.php:124
+msgid "EDD"
+msgstr "E.D.D."
+
+#@ edd-toolbar
+#: edd-toolbar.php:127
+#: edd-toolbar.php:435
+msgctxt "Translators: For the tooltip"
+msgid "Easy Digital Downloads"
+msgstr "Einfache Digitale Downloads"
+
+#@ edd-toolbar
+#: edd-toolbar.php:134
+msgid "Search Docs"
+msgstr "Doku durchsuchen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:135
+msgid "GO"
+msgstr "LOS"
+
+#@ edd-toolbar
+#: edd-toolbar.php:145
+#: edd-toolbar.php:147
+msgid "Support Forum"
+msgstr "Support-Forum"
+
+#@ edd-toolbar
+#: edd-toolbar.php:199
+#: edd-toolbar.php:201
+msgid "Bug Tracker at GitHub"
+msgstr "Fehler melden bei GitHub"
+
+#@ edd-toolbar
+#: edd-toolbar.php:207
+#: edd-toolbar.php:209
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#@ edd-toolbar
+#: edd-toolbar.php:249
+msgctxt "Translators: For the tooltip"
+msgid "Search Docs"
+msgstr "Dokumentation durchsuchen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:261
+#: edd-toolbar.php:263
+msgid "GitHub Repository Developer Center"
+msgstr "GitHub Repositorium für Entwickler"
+
+#@ edd-toolbar
+#: edd-toolbar.php:267
+#: edd-toolbar.php:269
+msgid "Official Blog"
+msgstr "Offizieller Blog"
+
+#@ edd-toolbar
+#: edd-toolbar.php:273
+#: edd-toolbar.php:275
+msgid "Features"
+msgstr "Austattung"
+
+#@ edd-toolbar
+#: edd-toolbar.php:279
+#: edd-toolbar.php:281
+msgid "Screenshots"
+msgstr "Screenshots"
+
+#@ edd-toolbar
+#: edd-toolbar.php:285
+#: edd-toolbar.php:287
+msgid "Extensions"
+msgstr "Erweiterungen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:291
+#: edd-toolbar.php:293
+msgid "Pippins Plugins"
+msgstr "PippinsPlugins.com"
+
+#@ edd-toolbar
+#: edd-toolbar.php:305
+msgid "German language files"
+msgstr "Deutsche Sprachdateien"
+
+#@ edd-toolbar
+#: edd-toolbar.php:307
+msgid "German language files for Easy Digital Downloads Plugin and more EDD extensions"
+msgstr "Deutsche Sprachdateien für das Einfache Digitale Downloads Plugin plus EDD-Erweiterungen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:319
+#: edd-toolbar.php:321
+msgid "All Downloads"
+msgstr "Alle Downloads"
+
+#@ edd-toolbar
+#: edd-toolbar.php:325
+#: edd-toolbar.php:327
+msgid "Add new Download"
+msgstr "Neuen Download Hinzufügen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:331
+msgid "Categories"
+msgstr "Kategorien"
+
+#@ edd-toolbar
+#: edd-toolbar.php:333
+msgid "Download Categories"
+msgstr "Download-Kategorien"
+
+#@ edd-toolbar
+#: edd-toolbar.php:337
+msgid "Tags"
+msgstr "Schlagwörter"
+
+#@ edd-toolbar
+#: edd-toolbar.php:339
+msgid "Download Tags"
+msgstr "Download-Schlagwörter"
+
+#@ edd-toolbar
+#: edd-toolbar.php:349
+#: edd-toolbar.php:351
+msgid "Payment History"
+msgstr "Bisherige Zahlungen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:357
+#: edd-toolbar.php:359
+msgid "Discount Codes"
+msgstr "Gutschein-Codes"
+
+#@ edd-toolbar
+#: edd-toolbar.php:365
+#: edd-toolbar.php:367
+msgid "Reports"
+msgstr "Statistiken"
+
+#@ edd-toolbar
+#: edd-toolbar.php:373
+msgid "Settings"
+msgstr "Einstellungen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:375
+#: edd-toolbar.php:381
+msgctxt "Translators: For the tooltip"
+msgid "General Settings"
+msgstr "Haupteinstellungen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:385
+#: edd-toolbar.php:387
+msgid "Payment Gateways"
+msgstr "Zahlungsweisen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:391
+#: edd-toolbar.php:393
+msgid "Emails"
+msgstr "E-Mails"
+
+#@ edd-toolbar
+#: edd-toolbar.php:397
+#: edd-toolbar.php:399
+msgid "Misc."
+msgstr "Sonstiges"
+
+#@ edd-toolbar
+#: edd-toolbar.php:432
+msgid "Downloads"
+msgstr "Downloads"
+
+#@ edd-toolbar
+#. translators: plugin header field 'Description'
+#: edd-toolbar.php:0
+msgid "This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar."
+msgstr "Dieses Plugin fügt der WordPress Wergzeugleiste bzw. Adminbar nützliche Administratorenlinks und Ressourcen für das Easy Digital Downloads Plugin hinzu."
+
+#@ edd-toolbar
+#: edd-toolbar.php:255
+#: edd-toolbar.php:257
+msgid "Plugin HQ"
+msgstr "Plugin-Zentrale"
+
+#@ edd-toolbar
+#: edd-toolbar.php:131
+msgid "Sub Forum"
+msgstr "Unterforum"
+
+#@ edd-toolbar
+#: edd-toolbar.php:151
+#: edd-toolbar.php:213
+#: edd-toolbar.php:215
+msgid "Frequently Asked Questions"
+msgstr "Häufig gestellte Fragen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:153
+msgctxt "Translators: For the tooltip"
+msgid "Frequently Asked Questions"
+msgstr "Häufig gestellte Fragen (FAQ)"
+
+#@ edd-toolbar
+#: edd-toolbar.php:163
+msgid "Add-On Plugins"
+msgstr "Zusatz-Plugins"
+
+#@ edd-toolbar
+#: edd-toolbar.php:165
+msgctxt "Translators: For the tooltip"
+msgid "Add-On Plugins"
+msgstr "Zusatz-Plugins (Erweiterungen)"
+
+#@ edd-toolbar
+#: edd-toolbar.php:169
+msgid "Feature Requests"
+msgstr "Feature-Anfragen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:171
+msgctxt "Translators: For the tooltip"
+msgid "Feature Requests"
+msgstr "Feature-Anfragen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:157
+msgid "Developer's API"
+msgstr "Entwickler API"
+
+#@ edd-toolbar
+#: edd-toolbar.php:159
+msgctxt "Translators: For the tooltip"
+msgid "Developer's API"
+msgstr "Entwickler API"
+
+#@ edd-toolbar
+#: edd-toolbar.php:195
+msgctxt "Translators: For the tooltip"
+msgid "Register for Premium Support Account"
+msgstr "Benutzerkonto für Premium-Support registrieren/ kaufen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:175
+msgid "Theme Conflicts"
+msgstr "Theme-Konflikte"
+
+#@ edd-toolbar
+#: edd-toolbar.php:177
+msgctxt "Translators: For the tooltip"
+msgid "Theme Conflicts"
+msgstr "Theme-Konflikte"
+
+#@ edd-toolbar
+#: edd-toolbar.php:181
+msgid "Plugin Conflicts"
+msgstr "Plugin-Konflikte"
+
+#@ edd-toolbar
+#: edd-toolbar.php:183
+msgctxt "Translators: For the tooltip"
+msgid "Plugin Conflicts"
+msgstr "Plugin-Konflikte"
+
+#@ edd-toolbar
+#: edd-toolbar.php:187
+msgid "General Support"
+msgstr "Allgemeiner Support"
+
+#@ edd-toolbar
+#: edd-toolbar.php:189
+msgctxt "Translators: For the tooltip"
+msgid "General Support"
+msgstr "Allgemeine Support-Themen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:193
+msgid "Premium Support"
+msgstr "Premium Support kaufen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:219
+#: edd-toolbar.php:221
+msgid "Installation"
+msgstr "Installation"
+
+#@ edd-toolbar
+#: edd-toolbar.php:225
+#: edd-toolbar.php:227
+msgid "Basic Config"
+msgstr "Basiskonfiguration"
+
+#@ edd-toolbar
+#: edd-toolbar.php:231
+#: edd-toolbar.php:233
+msgid "Create Downloads"
+msgstr "Downloads erstellen"
+
+#@ edd-toolbar
+#: edd-toolbar.php:237
+#: edd-toolbar.php:239
+msgid "Shopping Cart Setup"
+msgstr "Warenkorb einrichten"
+
+#@ edd-toolbar
+#: edd-toolbar.php:379
+msgid "General"
+msgstr "Allgemein"
+
