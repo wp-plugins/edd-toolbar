@@ -10,7 +10,7 @@
  * Plugin Name: Easy Digital Downloads Toolbar
  * Plugin URI: http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * Description: This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
- * Version: 1.0
+ * Version: 1.1
  * Author: David Decker - DECKERWEB
  * Author URI: http://deckerweb.de/
  * License: GPLv2
@@ -71,17 +71,51 @@ function ddw_eddtb_plugin_links( $eddtb_links, $eddtb_file ) {
 }
 
 
+add_filter( 'edd_settings_misc', 'ddw_eddtb_add_settings' );
+/**
+ * Adds the settings to the "Easy Digital Downloads > Settings > Misc" section
+ *
+ * @since 1.1
+ */
+function ddw_eddtb_add_settings( $settings ) {
+
+	$eddtb_settings = array(
+		array(
+			'id' => 'eddtb_settings',
+			'name' => '<strong>' . __( 'Extension: Toolbar Settings', 'edd-toolbar' ) . '</strong>',
+			'desc' => __( 'Remove or add some sections', 'edd-toolbar' ),
+			'type' => 'header'
+		),
+		array(
+			'id' => 'eddtb_remove_resources',
+			'name' => __( 'Display of Resources section', 'edd-toolbar' ),
+			'desc' => __( 'Disable the Resources links section. (Default display: enabled)', 'edd-toolbar' ),
+			'type' => 'checkbox'
+		),
+		array(
+			'id' => 'eddtb_remove_translation_resources',
+			'name' => __( 'Display of Translations Resources section', 'edd-toolbar' ),
+			'desc' => __( 'Disable the Translations Resources links section. (Default display: enabled for all Non-English locales)', 'edd-toolbar' ),
+			'type' => 'checkbox'
+		)
+	);
+
+	return array_merge( $settings, $eddtb_settings );
+
+}  // end of function ddw_eddtb_add_settings
+
+
 add_action( 'admin_bar_menu', 'ddw_eddtb_toolbar_menu', 98 );
 /**
  * Add new menu items to the WordPress Toolbar / Admin Bar.
  * 
  * @since 1.0
  *
- * @global mixed $wp_admin_bar
+ * @global mixed $wp_admin_bar, $edd_options
  */
 function ddw_eddtb_toolbar_menu() {
 
-	global $wp_admin_bar;
+	global $wp_admin_bar, $edd_options;
 
 	/**
 	 * Allows for filtering the general user role/capability to display main & sub-level items
@@ -112,7 +146,11 @@ function ddw_eddtb_toolbar_menu() {
 	/** Create parent menu item references */
 	$eddbar = $prefix . 'admin-bar';				// root level
 		$eddsupport = $prefix . 'eddsupport';				// sub level: edd support
+			$eddsupportsections = $prefix . 'eddsupportsections';		// third level: support sections
+			$eddsupportaccount = $prefix . 'eddsupportaccount';		// third level: support user account
 		$edddocs = $prefix . 'edddocs';					// sub level: edd docs
+			$edddocsquick = $prefix . 'edddocsquick';			// third level: docs quick links
+			$edddocssections = $prefix . 'edddocssections';			// third level: docs sections
 		$eddsites = $prefix . 'eddsites';				// sub level: edd sites
 			$eddfeatures = $prefix . 'eddfeatures';				// third level: edd features
 		$edddownloads = $prefix . 'edddownloads';			// sub level: edd downloads
@@ -134,9 +172,8 @@ function ddw_eddtb_toolbar_menu() {
 	$eddtb_search_docs = __( 'Search Docs', 'edd-toolbar' );
 	$eddtb_go_button = '<input type="submit" value="' . __( 'GO', 'edd-toolbar' ) . '" class="eddtb-search-go"  /></form>';
 
-
 	/** Display these items also when Easy Digital Downloads plugin is not installed */
-	if ( ! defined( 'EDDTB_RESOURCES_DISPLAY' ) ) {
+	if ( ! defined( 'EDDTB_RESOURCES_DISPLAY' ) && ! isset( $edd_options['eddtb_remove_resources'] ) ) {
 		$eddgroup_menu_items = array(
 
 			// Support menu items
@@ -152,42 +189,71 @@ function ddw_eddtb_toolbar_menu() {
 				'href'   => 'http://easydigitaldownloads.com/forums/forum/frequently-asked-questions/',
 				'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Frequently Asked Questions', 'Translators: For the tooltip', 'edd-toolbar' ) )
 			),
-			'eddsupport-sub-devapi' => array(
+
+			// Support: Sections
+			'eddsupportsections' => array(
 				'parent' => $eddsupport,
-				'title'  => __( 'Developer\'s API', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/forums/forum/developers-api/',
-				'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Developer\'s API', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				'title'  => __( 'Sections', 'edd-toolbar' ),
+				'href'   => false,
+				'meta'   => array( 'title' => __( 'Sections', 'edd-toolbar' ) . ' &raquo;' )
 			),
-			'eddsupport-sub-addons' => array(
+				'eddsupportsections-sub-devapi' => array(
+					'parent' => $eddsupportsections,
+					'title'  => __( 'Developer\'s API', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/forums/forum/developers-api/',
+					'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Developer\'s API', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+				'eddsupportsections-sub-addons' => array(
+					'parent' => $eddsupportsections,
+					'title'  => __( 'Add-On Plugins', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/forums/forum/add-on-plugins/',
+					'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Add-On Plugins', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+				'eddsupportsections-sub-requests' => array(
+					'parent' => $eddsupportsections,
+					'title'  => __( 'Feature Requests', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/forums/forum/feature-requests/',
+					'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Feature Requests', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+				'eddsupportsections-sub-tconflicts' => array(
+					'parent' => $eddsupportsections,
+					'title'  => __( 'Theme Conflicts', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/forums/forum/theme-conflicts/',
+					'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Theme Conflicts', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+				'eddsupportsections-sub-pconflicts' => array(
+					'parent' => $eddsupportsections,
+					'title'  => __( 'Plugin Conflicts', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/forums/forum/plugin-conflicts/',
+					'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Plugin Conflicts', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+				'eddsupportsections-sub-general' => array(
+					'parent' => $eddsupportsections,
+					'title'  => __( 'General Support', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/forums/forum/general-support/',
+					'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'General Support', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+				'eddsupportsections-sub-translations' => array(
+					'parent' => $eddsupportsections,
+					'title'  => __( 'Translations', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/forums/forum/translations/',
+					'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Translations', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+
+			// Support: User account
+			'eddsupportaccount' => array(
 				'parent' => $eddsupport,
-				'title'  => __( 'Add-On Plugins', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/forums/forum/add-on-plugins/',
-				'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Add-On Plugins', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				'title'  => __( 'User Account at Support Site', 'edd-toolbar' ),
+				'href'   => 'http://easydigitaldownloads.com/your-account/',
+				'meta'   => array( 'title' => _x( 'User Account at Support Site', 'Translators: For the tooltip', 'edd-toolbar' ) )
 			),
-			'eddsupport-sub-requests' => array(
-				'parent' => $eddsupport,
-				'title'  => __( 'Feature Requests', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/forums/forum/feature-requests/',
-				'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Feature Requests', 'Translators: For the tooltip', 'edd-toolbar' ) )
-			),
-			'eddsupport-sub-tconflicts' => array(
-				'parent' => $eddsupport,
-				'title'  => __( 'Theme Conflicts', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/forums/forum/theme-conflicts/',
-				'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Theme Conflicts', 'Translators: For the tooltip', 'edd-toolbar' ) )
-			),
-			'eddsupport-sub-pconflicts' => array(
-				'parent' => $eddsupport,
-				'title'  => __( 'Plugin Conflicts', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/forums/forum/plugin-conflicts/',
-				'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'Plugin Conflicts', 'Translators: For the tooltip', 'edd-toolbar' ) )
-			),
-			'eddsupport-sub-general' => array(
-				'parent' => $eddsupport,
-				'title'  => __( 'General Support', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/forums/forum/general-support/',
-				'meta'   => array( 'title' => $eddtb_sub_forum . _x( 'General Support', 'Translators: For the tooltip', 'edd-toolbar' ) )
-			),
+				'eddsupportaccount-login' => array(
+					'parent' => $eddsupportaccount,
+					'title'  => __( 'Login', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/your-account/login/',
+					'meta'   => array( 'title' => _x( 'Login', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
+
 			'eddsupport-premium' => array(
 				'parent' => $eddsupport,
 				'title'  => __( 'Premium Support', 'edd-toolbar' ),
@@ -214,37 +280,84 @@ function ddw_eddtb_toolbar_menu() {
 				'href'   => 'http://easydigitaldownloads.com/documentation/faqs/',
 				'meta'   => array( 'title' => __( 'Frequently Asked Questions', 'edd-toolbar' ) )
 			),
-			'edddocs-install' => array(
+
+			// Documentation: Quick Links
+			'edddocsquick' => array(
 				'parent' => $edddocs,
-				'title'  => __( 'Installation', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/docs/installation/',
-				'meta'   => array( 'title' => __( 'Installation', 'edd-toolbar' ) )
+				'title'  => __( 'Quick Links', 'edd-toolbar' ),
+				'href'   => false,
+				'meta'   => array( 'title' => __( 'Quick Links', 'edd-toolbar' ) . ' &raquo;' )
 			),
-			'edddocs-basicconfig' => array(
+				'edddocsquick-install' => array(
+					'parent' => $edddocsquick,
+					'title'  => __( 'Installation', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/installation/',
+					'meta'   => array( 'title' => __( 'Installation', 'edd-toolbar' ) )
+				),
+				'edddocsquick-basicconfig' => array(
+					'parent' => $edddocsquick,
+					'title'  => __( 'Basic Config', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/basic-config/',
+					'meta'   => array( 'title' => __( 'Basic Config', 'edd-toolbar' ) )
+				),
+				'edddocsquick-createdownloads' => array(
+					'parent' => $edddocsquick,
+					'title'  => __( 'Create Downloads', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/create-your-first-download/',
+					'meta'   => array( 'title' => __( 'Create Downloads', 'edd-toolbar' ) )
+				),
+				'edddocsquick-cartsetup' => array(
+					'parent' => $edddocsquick,
+					'title'  => __( 'Shopping Cart Setup', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/setting-up-the-shopping-cart/',
+					'meta'   => array( 'title' => __( 'Shopping Cart Setup', 'edd-toolbar' ) )
+				),
+
+			// Documentation: Sections
+			'edddocssections' => array(
 				'parent' => $edddocs,
-				'title'  => __( 'Basic Config', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/docs/basic-config/',
-				'meta'   => array( 'title' => __( 'Basic Config', 'edd-toolbar' ) )
+				'title'  => __( 'Sections', 'edd-toolbar' ),
+				'href'   => false,
+				'meta'   => array( 'title' => __( 'Sections', 'edd-toolbar' ) . ' &raquo;' )
 			),
-			'edddocs-createdownloads' => array(
-				'parent' => $edddocs,
-				'title'  => __( 'Create Downloads', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/docs/create-your-first-download/',
-				'meta'   => array( 'title' => __( 'Create Downloads', 'edd-toolbar' ) )
-			),
-			'edddocs-cartsetup' => array(
-				'parent' => $edddocs,
-				'title'  => __( 'Shopping Cart Setup', 'edd-toolbar' ),
-				'href'   => 'http://easydigitaldownloads.com/docs/setting-up-the-shopping-cart/',
-				'meta'   => array( 'title' => __( 'Shopping Cart Setup', 'edd-toolbar' ) )
-			),
+				'edddocssections-install' => array(
+					'parent' => $edddocssections,
+					'title'  => __( 'Install &amp; Upgrades', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/section/install-upgrade/',
+					'meta'   => array( 'title' => __( 'Install &amp Upgrades', 'edd-toolbar' ) )
+				),
+				'edddocssections-usage' => array(
+					'parent' => $edddocssections,
+					'title'  => __( 'Usage', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/section/usage/',
+					'meta'   => array( 'title' => __( 'Usage', 'edd-toolbar' ) )
+				),
+				'edddocssections-devapi' => array(
+					'parent' => $edddocssections,
+					'title'  => __( 'Developer API', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/section/developer-api/',
+					'meta'   => array( 'title' => __( 'Developer API', 'edd-toolbar' ) )
+				),
+				'edddocssections-hooks' => array(
+					'parent' => $edddocssections,
+					'title'  => __( 'API: Hook Reference', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/section/actions/',
+					'meta'   => array( 'title' => __( 'API: Hook Reference', 'edd-toolbar' ) )
+				),
+				'edddocssections-filters' => array(
+					'parent' => $edddocssections,
+					'title'  => __( 'API: Filter Reference', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/section/filters/',
+					'meta'   => array( 'title' => __( 'API: Filter Reference', 'edd-toolbar' ) )
+				),
 
 			// Docs search form
 			'edddocs-searchform' => array(
 				'parent' => $eddgroup,
 				'title' => '<form method="get" action="http://easydigitaldownloads.com/" class=" " target="_blank">
-				<input type="hidden" name="post_type" value="page" />
-				<input type="text" placeholder="' . $eddtb_search_docs . '" onblur="this.value=(this.value==\'\') ? \'' . $eddtb_search_docs . '\' : this.value;" onfocus="this.value=(this.value==\'' . $eddtb_search_docs . '\') ? \'\' : this.value;" value="' . $eddtb_search_docs . '" name="s" value="' . esc_attr( 'Search Docs', 'edd-toolbar' ) . '" class="text eddtb-search-input" />' . $eddtb_go_button,
+				<input type="text" placeholder="' . $eddtb_search_docs . '" onblur="this.value=(this.value==\'\') ? \'' . $eddtb_search_docs . '\' : this.value;" onfocus="this.value=(this.value==\'' . $eddtb_search_docs . '\') ? \'\' : this.value;" value="' . $eddtb_search_docs . '" name="s" value="' . esc_attr( 'Search Docs', 'edd-toolbar' ) . '" class="text eddtb-search-input" />
+				<input type="hidden" name="post_type[]" value="docs" />
+				<input type="hidden" name="post_type[]" value="page" />' . $eddtb_go_button,
 				'href'   => false,
 				'meta'   => array( 'target' => '', 'title' => _x( 'Search Docs', 'Translators: For the tooltip', 'edd-toolbar' ) )
 			),
@@ -286,6 +399,12 @@ function ddw_eddtb_toolbar_menu() {
 				'href'   => 'http://easydigitaldownloads.com/extensions/',
 				'meta'   => array( 'title' => __( 'Extensions', 'edd-toolbar' ) )
 			),
+			'eddsites-wporg' => array(
+				'parent' => $eddsites,
+				'title'  => __( 'Free plugins/extensions at WP.org', 'edd-toolbar' ),
+				'href'   => 'http://wordpress.org/extend/plugins/search.php?q=easy+digital+downloads',
+				'meta'   => array( 'title' => __( 'Free plugins/extensions at WP.org', 'edd-toolbar' ) )
+			),
 			'eddsites-pplugins' => array(
 				'parent' => $eddsites,
 				'title'  => __( 'Pippins Plugins', 'edd-toolbar' ),
@@ -298,7 +417,7 @@ function ddw_eddtb_toolbar_menu() {
 
 
 	/** Display language specific links only for these locales: de_DE, de_AT, de_CH, de_LU */
-	if ( ! defined( 'EDDTB_DE_DISPLAY' ) && ( get_locale() == 'de_DE' || get_locale() == 'de_AT' || get_locale() == 'de_CH' || get_locale() == 'de_LU' ) ) {
+	if ( ! defined( 'EDDTB_DE_DISPLAY' ) && ! isset( $edd_options['eddtb_remove_translation_resources'] ) && ( get_locale() == 'de_DE' || get_locale() == 'de_AT' || get_locale() == 'de_CH' || get_locale() == 'de_LU' ) ) {
 		// German EDD language packs
 		$eddgroup_menu_items['languages-de'] = array(
 			'parent' => $eddgroup,
@@ -307,6 +426,18 @@ function ddw_eddtb_toolbar_menu() {
 			'meta'   => array( 'title' => __( 'German language files for Easy Digital Downloads Plugin and more EDD extensions', 'edd-toolbar' ) )
 		);
 	}  // end-if German locales
+
+
+	/** Translate EDD section - only display for non-English locales */
+	if ( ! defined( 'EDDTB_TRANSLATIONS_DISPLAY' ) && ! isset( $edd_options['eddtb_remove_translation_resources'] ) && ( empty( $locale ) || !( get_locale() == 'en_US' || get_locale() == 'en_GB' || get_locale() == 'en_NZ' || get_locale() == 'en' ) ) ) {
+		// Translations Forum
+		$eddgroup_menu_items['translations-forum'] = array(
+			'parent' => $eddgroup,
+			'title'  => __( 'Translations Forum', 'edd-toolbar' ),
+			'href'   => 'http://easydigitaldownloads.com/forums/forum/translations/',
+			'meta'   => array( 'title' => sprintf( _x( 'Translations Forum (%s Support Forum)', 'Translators: For the tooltip', 'edd-toolbar' ), $eddtb_edd_name ) )
+		);
+	}  // end-if translate genesis
 
 
 	/** Show these items only if Easy Digital Downloads plugin is actually installed */
@@ -337,6 +468,17 @@ function ddw_eddtb_toolbar_menu() {
 				'title'  => __( 'Tags', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit-tags.php?taxonomy=download_tag&post_type=download' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Download Tags', 'edd-toolbar' ) )
+			);
+
+			// Get the current EDD "downloads" slug
+			$eddtb_downloads_slug = defined( 'EDD_SLUG' ) ? EDD_SLUG : 'downloads';
+
+			// Display links to frontend "Downloads Archive" page
+			$menu_items['edddownloads-dlarchives'] = array(
+				'parent' => $edddownloads,
+				'title'  => __( 'Visit Downloads Archives', 'edd-toolbar' ),
+				'href'   => get_home_url() . '/' . $eddtb_downloads_slug . '/',
+				'meta'   => array( 'target' => '', 'title' => _x( 'Visit Downloads Archives on Website Frontend', 'Translators: For the tooltip', 'edd-toolbar' ) )
 			);
 		} // end-if cap check
 
@@ -415,8 +557,9 @@ function ddw_eddtb_toolbar_menu() {
 
 
 	/** Allow menu items to be filtered, but pass in parent menu item IDs */
-	$menu_items = (array) apply_filters( 'ddw_eddtb_menu_items', $menu_items, $eddgroup_menu_items, $prefix, $eddbar, 
-						$eddsupport, $edddocs, $eddsites, $eddfeatures, $eddsettings, $eddgroup );
+	$menu_items = (array) apply_filters( 'ddw_eddtb_menu_items', $menu_items, $eddgroup_menu_items, $prefix, $eddbar,
+						$eddsupport, $eddsupportsections, $eddsupportaccount, $edddocs, $edddocsquick,
+						$edddocssections, $eddsites, $eddfeatures, $eddsettings, $eddgroup );
 
 
 	/**
@@ -531,16 +674,20 @@ dirname( __FILE__ ) ) );
 			background-position: 0.85em 50%;
 			padding-left: 30px;
 		}
-		#wp-admin-bar-ddw-edd-languages-de > .ab-item:before {
+		#wp-admin-bar-ddw-edd-languages-de > .ab-item:before,
+		#wp-admin-bar-ddw-edd-translations-forum > .ab-item:before {
 			color: #ff9900;
 			content: '• ';
 		}
 		#wpadminbar .eddtb-search-input {
 			width: 140px;
 		}
+		#wp-admin-bar-ddw-edd-eddsupportsections .ab-item,
+		#wp-admin-bar-ddw-edd-edddocsquick .ab-item,
+		#wp-admin-bar-ddw-edd-edddocssections .ab-item,
 		#wpadminbar .eddtb-search-input,
 		#wpadminbar .eddtb-search-go {
-			color: #21759b;
+			color: #21759b !important;
 			text-shadow: none;
 		}
 		#wpadminbar .eddtb-search-input,

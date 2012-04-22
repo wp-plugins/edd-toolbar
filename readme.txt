@@ -1,10 +1,10 @@
 === Easy Digital Downloads Toolbar ===
 Contributors: daveshine, deckerweb
 Donate link: http://genesisthemes.de/en/donate/
-Tags: toolbar, adminbar, admin bar, easy digital downloads, digital downloads, download, e-downloads, edd, administration, resources, links, deckerweb, ddwtoolbar
+Tags: toolbar, adminbar, admin bar, easy digital downloads, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
-Tested up to: 3.4-beta2
-Stable tag: 1.0
+Tested up to: 3.4-beta3
+Stable tag: 1.1
 
 This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
 
@@ -16,6 +16,7 @@ This **small and lightweight plugin extension** just adds a lot [Easy Digital Do
 = General Features =
 * Free Extension for ["Easy Digital Downloads"](http://wordpress.org/extend/plugins/easy-digital-downloads/) - all plugin settings are hooked in!
 * Access your stuff from one place in the toolbar on backend and frontend, without much scrolling... in other words: manage your digital downloads even more easily :-)
+* Plugin options under "Misc" settings in "Easy Digital Downloads": you can deactivate the Resources links group. (since v1.1)
 * Alternate main Icon with 11 additional colored/alternate icons included :) (changeable via filters)
 * Plus 4 filters included to change wording/tooltip and icon of the main item - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
 * For custom "branding" or special needs a few sections like the "Resource links group" could be hidden from displaying via your active theme/child theme - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
@@ -23,7 +24,7 @@ This **small and lightweight plugin extension** just adds a lot [Easy Digital Do
 * Fully internationalized! Real-life tested and developed with international users in mind!
 * Fully WPML compatible!
 * Fully Multisite compatible, you can also network-enable it if ever needed (per site use is recommended).
-* Tested with WordPress versions 3.3.1 and 3.4-beta - also in debug mode (no stuff there, ok? :)
+* Tested with WordPress versions 3.3.1, 3.3.2 and 3.4-beta1-3 - also in debug mode (no stuff there, ok? :)
 * Link to downloadable German language packs - only displayed when German locales are active (de_DE, de_AT, de_CH, de_LU)
 * *NOTE:* I would be happy to add more language/locale specific resources and more useful third-party links - just contact me!
 
@@ -79,7 +80,7 @@ Though intended for a per site use it could make some sense in such an edge case
 This plugin has NO settings page because I believe it's just not neccessarry. All customizing could be done via filters, constants and regular WordPress user roles & capabilities. As the plugin is indended for a admin/ webmaster use that's the way to go. This way we can save the overhaul of an options panel/settings page, additional database storing & requests, uninstall routines and such. End result: a lightweight system that just works and saves clicks & time :-).
 
 = Can certain sections be removed? =
-Yes, this is possible! You can remove the following sections: "Resources link group" at the bottom (all items) and "German language stuff" (all items)
+Yes, this is possible! You can remove the following sections: "Resources link group" at the bottom (all items), "German language stuff" (all items) and "Translations resources" (all items)
 
 To achieve this add one, some or all of the following constants to your current theme's/child theme's `functions.php` or similar file:
 `
@@ -88,6 +89,9 @@ define( 'EDDTB_RESOURCES_DISPLAY', FALSE );
 
 /** Easy Digital Downloads Toolbar: Remove German Language Items */
 define( 'EDDTB_DE_DISPLAY', FALSE );
+
+/** Easy Digital Downloads Toolbar: Remove Translations Items */
+define( 'EDDTB_TRANSLATIONS_DISPLAY', FALSE );
 `
 
 = Can the the whole toolbar entry be removed, especially for certain users? =
@@ -270,24 +274,41 @@ function custom_eddtb_main_item_tooltip() {
 
 **Final note:** If you don't like to add your customizations to your `functions.php` file or similar file of theme/child theme/skin you can also add them to a functionality plugin or an mu-plugin. This way you can also use this better for Multisite environments. In general you are then more independent from theme/child theme changes etc.
 
-All the custom & branding stuff code above can also be found as a Gist on GitHub: https://gist.github.com/2392882
+All the custom & branding stuff code above can also be found as a Gist on GitHub: https://gist.github.com/2392882 (you can also add your questions/ feedback there :)
 
 == Screenshots ==
 
 1. Easy Digital Downloads Toolbar in action - primary level (running with WordPress 3.3+ here)
-2. Easy Digital Downloads Toolbar in action - a secondary level - add new download (running with WordPress 3.3+ here)
-3. Easy Digital Downloads Toolbar in action - a secondary level - settings: payment gateways (running with WordPress 3.3+ here)
-4. Easy Digital Downloads Toolbar in action - a secondary level - resources: support forums (running with WordPress 3.3+ here)
-5. Easy Digital Downloads Toolbar in action - a secondary level - resources: documentation (running with WordPress 3.3+ here)
+2. Easy Digital Downloads Toolbar in action - a second level - add new download (running with WordPress 3.3+ here)
+3. Easy Digital Downloads Toolbar in action - a second level - settings: payment gateways (running with WordPress 3.3+ here)
+4. Easy Digital Downloads Toolbar in action - a third level - resources: support forums (running with WordPress 3.3+ here)
+5. Easy Digital Downloads Toolbar in action - a third level - resources: documentation (running with WordPress 3.3+ here)
 6. Easy Digital Downloads Toolbar in action - a secondary level - resources: plugin headquarters & stuff (running with WordPress 3.3+ here)
 7. Easy Digital Downloads Toolbar in action - language specific links at the bottom - for German locales (running with WordPress 3.3+ here)
+8. Easy Digital Downloads Toolbar in action - additional plugin settings under "Misc" in EDD settings - new option since plugin version 1.1+
 
 == Changelog ==
+
+= 1.1 (2012-04-22) =
+* NEW: Added two options to the "Easy Digital Downloads > Settings > Misc" page: to easily remove the Resources & Languages/Translations resources items from the toolbar menu per checkbox option.
+* NEW: Added link to "Downloads Archives" on frontend like: `http://yoursite.com/downloads/` to get quick access to your downlods listing. Note, also supports user-defined slug via `EDD_SLUG` constant (since EDD v1.0.3)!
+* NEW: Added "Translations" sub-forum link to resources.
+* NEW: Added more Documentation and Developer API resource links.
+* NEW: Added link to free extensions in the official plugin repository.
+* UPDATE: Restructured Support & Documentation resource links a bit for easier access.
+* UPDATE: Minor code & documentation tweaks and improvements.
+* UPDATE: Updated two existing screenshots and added one new (plugin settings).
+* UPDATE: Updated/corrected readme.txt file.
+* UPDATE: Updated German translations and also the .pot file for all translators!
+* NEW: Added banner image on WordPress.org for better plugin branding :)
 
 = 1.0 (2012-04-15) =
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1 =
+Several changes & improvements: Added plugin options to "Misc" settings in EDD. Added more resource links, and restructered some. Updated documentation, screenshots, readme as well as .pot plus German translations.
 
 = 1.0 =
 Just released into the wild.
@@ -298,7 +319,7 @@ Just released into the wild.
 * German: Deutsch - immer dabei! [Download auch via deckerweb.de](http://deckerweb.de/material/sprachdateien/easy-digital-downloads-plugin/#edd-toolbar)
 * For custom and update-secure language files please upload them to `/wp-content/languages/edd-toolbar/` (just create this folder) - This enables you to use fully custom translations that won't be overridden on plugin updates. Also, complete custom English wording is possible with that, just use a language file like `edd-toolbar-en_US.mo/.po` to achieve that (for creating one see the following tools).
 
-*Note:* All my plugins are localized/ translateable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful. For translating I recommend the awesome ["Codestyling Localization" plugin](http://wordpress.org/extend/plugins/codestyling-localization/) and for validating the ["Poedit Editor"](http://www.poedit.net/), which works fine on Windows, Mac and Linux.
+*Note:* All my plugins are internationalized/ translateable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful. For translating I recommend the awesome ["Codestyling Localization" plugin](http://wordpress.org/extend/plugins/codestyling-localization/) and for validating the ["Poedit Editor"](http://www.poedit.net/), which works fine on Windows, Mac and Linux.
 
 == Additional Info ==
 **Idea Behind / Philosophy:** Just a little leightweight plugin for all the Easy Digital Downloads plugin users out there to make their daily web admin life a bit easier. I'll try to add some plugin/extension support if it makes some sense in the future. So stay tuned :).
