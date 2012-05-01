@@ -3,8 +3,10 @@ Contributors: daveshine, deckerweb
 Donate link: http://genesisthemes.de/en/donate/
 Tags: toolbar, adminbar, admin bar, easy digital downloads, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
-Tested up to: 3.4-beta3
-Stable tag: 1.1
+Tested up to: 3.4
+Stable tag: 1.2
+License: GPLv2 or later
+License URI: http://www.opensource.org/licenses/gpl-license.php
 
 This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
 
@@ -55,7 +57,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 3. Look at your toolbar / admin bar and enjoy using the new links there :)
 4. Go and manage your digital downloads even more easily :)
 
-**Note:** It's not required to also have the "Easy Digital Downloads" plugin installed but without it this toolbar plugin makes absolutely no sense! -- I recommend to use my plugin with ["Easy Digital Downloads"](http://wordpress.org/extend/plugins/easy-digital-downloads/) v1.0.1.1 or higher.
+**Note:** It's not required to also have the "Easy Digital Downloads" plugin installed but without it this toolbar plugin makes absolutely no sense! -- I recommend to use my plugin with ["Easy Digital Downloads"](http://wordpress.org/extend/plugins/easy-digital-downloads/) v1.0.5 or higher.
 
 **Own translation/wording:** For custom and update-secure language files please upload them to `/wp-content/languages/edd-toolbar/` (just create this folder) - This enables you to use fully custom translations that won't be overridden on plugin updates. Also, complete custom English wording is possible with that, just use a language file like `edd-toolbar-en_US.mo/.po` to achieve that (for creating one see the tools on "Other Notes").
 
@@ -79,11 +81,36 @@ Though intended for a per site use it could make some sense in such an edge case
 = Why is there no admin settings page to this plugin? =
 This plugin has NO settings page because I believe it's just not neccessarry. All customizing could be done via filters, constants and regular WordPress user roles & capabilities. As the plugin is indended for a admin/ webmaster use that's the way to go. This way we can save the overhaul of an options panel/settings page, additional database storing & requests, uninstall routines and such. End result: a lightweight system that just works and saves clicks & time :-).
 
+= Can custom menu items be hooked in via theme/child theme or other plugins? =
+Yes, this is possible since version 1.2 of the plugin! There are two action hooks available for hooking custom menu items in -- `eddtb_custom_main_items` for the main section and `eddtb_custom_group_items` for the resource group section. Here's an example code:
+`
+add_action( 'eddtb_custom_group_items', 'eddtb_custom_additional_group_item' );
+/**
+ * Easy Digital Downloads Toolbar: Custom Resource Group Items
+ *
+ * @global mixed $wp_admin_bar
+ */
+function eddtb_custom_additional_group_item() {
+
+	global $wp_admin_bar;
+
+	$wp_admin_bar->add_menu( array(
+		'parent' => 'ddw-edd-eddbar',
+		'title'  => __( 'Custom Menu Item Name', 'your-textdomain' ),
+		'href'   => 'http://deckerweb.de/',
+		'meta'   => array( 'title' => __( 'Custom Menu Item Name Tooltip', 'your-textdomain' ) )
+	) );
+}
+`
+
 = Can certain sections be removed? =
-Yes, this is possible! You can remove the following sections: "Resources link group" at the bottom (all items), "German language stuff" (all items) and "Translations resources" (all items)
+Yes, this is possible! You can remove the following links or sections: "Add-Ons" settings link, "Resources link group" at the bottom (all items), "German language stuff" (all items) and "Translations resources" (all items)
 
 To achieve this add one, some or all of the following constants to your current theme's/child theme's `functions.php` or similar file:
 `
+/** Easy Digital Downloads Toolbar: Remove Add-On(s) Item(s) */
+define( 'EDDTB_ADDONS_DISPLAY', FALSE );
+
 /** Easy Digital Downloads Toolbar: Remove Resource Items */
 define( 'EDDTB_RESOURCES_DISPLAY', FALSE );
 
@@ -208,6 +235,7 @@ function custom_eddtb_main_icon() {
 }
 `
 --> Uses a custom image from your active child theme's `/images/` folder
+
 --> Recommended dimensions are 16px x 16px
 
 **eddtb_filter_main_icon_display**
@@ -274,7 +302,23 @@ function custom_eddtb_main_item_tooltip() {
 
 **Final note:** If you don't like to add your customizations to your `functions.php` file or similar file of theme/child theme/skin you can also add them to a functionality plugin or an mu-plugin. This way you can also use this better for Multisite environments. In general you are then more independent from theme/child theme changes etc.
 
-All the custom & branding stuff code above can also be found as a Gist on GitHub: https://gist.github.com/2392882 (you can also add your questions/ feedback there :)
+= How can I hook in additional menu items from a plugin or theme? =
+This is possible! Plugin and theme developers could use the included hooks to add stuff to the main items or resource group items section. The hooks are:
+
+* `eddtb_custom_main_items` for the main section
+* `eddtb_custom_group_items` for the resource group section
+* Example code:
+`
+add_action( 'eddtb_custom_main_items', 'eddtb_add_custom_main_items' );
+/**
+ * Easy Digital Downloads Toolbar: Add Custom Main Items
+ */
+function eddtb_add_custom_main_items() {
+	// Your custom stuff here, you might only use the WP Toolbar / Admin Bar API here!
+}
+`
+
+All the custom, branding and developer stuff code above can also be found as a Gist on GitHub: https://gist.github.com/2392882 (you can also add your questions/ feedback there :)
 
 == Screenshots ==
 
@@ -288,6 +332,15 @@ All the custom & branding stuff code above can also be found as a Gist on GitHub
 8. Easy Digital Downloads Toolbar in action - additional plugin settings under "Misc" in EDD settings - new option since plugin version 1.1+
 
 == Changelog ==
+
+= 1.2 (2012-05-01) =
+* NEW: Added new official "Styles" and "Add Ons" settings links, plus a new Documentation resource link.
+* UPDATE: Moved all admin-only functions/code from main file to extra admin file which only loads within 'wp-admin', this way it's all  performance-improved! :)
+* NEW: Added two action hooks for hooking custom menu items in -- `eddtb_custom_main_items` for the main section and `eddtb_custom_group_items` for the resource group section (See FAQ section here for more info on that).
+* BUGFIX: Translation display only for non-English locales fixed.
+* UPDATE: Updated and improved documentation of readme.txt file here.
+* UPDATE: Updated German translations and also the .pot file for all translators.
+* UPDATE: Extended GPL License info in readme.txt as well as main plugin file.
 
 = 1.1 (2012-04-22) =
 * NEW: Added two options to the "Easy Digital Downloads > Settings > Misc" page: to easily remove the Resources & Languages/Translations resources items from the toolbar menu per checkbox option.
@@ -306,6 +359,9 @@ All the custom & branding stuff code above can also be found as a Gist on GitHub
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2 =
+Several changes & improvements: Performance/Code improvements. Added new settings links, also two new action hooks for custom items. Updated .pot file for translators plus German translations.
 
 = 1.1 =
 Several changes & improvements: Added plugin options to "Misc" settings in EDD. Added more resource links, and restructered some. Updated documentation, screenshots, readme as well as .pot plus German translations.

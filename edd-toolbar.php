@@ -10,12 +10,31 @@
  * Plugin Name: Easy Digital Downloads Toolbar
  * Plugin URI: http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * Description: This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
- * Version: 1.1
+ * Version: 1.2
  * Author: David Decker - DECKERWEB
  * Author URI: http://deckerweb.de/
  * License: GPLv2
  * Text Domain: edd-toolbar
  * Domain Path: /languages/
+ *
+ * Copyright 2012 David Decker - DECKERWEB
+ *
+ *     This file is part of Genesis Layout Extras,
+ *     a plugin for WordPress.
+ *
+ *     Easy Digital Downloads Toolbar is free software:
+ *     You can redistribute it and/or modify it under the terms of the
+ *     GNU General Public License as published by the Free Software
+ *     Foundation, either version 2 of the License, or (at your option)
+ *     any later version.
+ *
+ *     Easy Digital Downloads Toolbar is distributed in the hope that
+ *     it will be useful, but WITHOUT ANY WARRANTY; without even the
+ *     implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ *     PURPOSE. See the GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with WordPress. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -32,9 +51,11 @@ define( 'EDDTB_PLUGIN_BASEDIR', dirname( plugin_basename( __FILE__ ) ) );
 
 add_action( 'init', 'ddw_eddtb_init' );
 /**
- * Load the text domain for translation of the plugin
+ * Load the text domain for translation of the plugin.
+ * Load admin helper functions - only within 'wp-admin'.
  * 
  * @since 1.0
+ * @version 1.1
  */
 function ddw_eddtb_init() {
 
@@ -43,66 +64,17 @@ function ddw_eddtb_init() {
 
 	/** Then look in plugin's "languages" folder = default */
 	load_plugin_textdomain( 'edd-toolbar', false, EDDTB_PLUGIN_BASEDIR . '/languages/' );
-}
 
-
-add_filter( 'plugin_row_meta', 'ddw_eddtb_plugin_links', 10, 2 );
-/**
- * Add various support links to plugin page
- *
- * @since 1.0
- *
- * @param  $eddtb_links
- * @param  $eddtb_file
- * @return strings plugin links
- */
-function ddw_eddtb_plugin_links( $eddtb_links, $eddtb_file ) {
-
-	if ( ! current_user_can( 'install_plugins' ) )
-		return $eddtb_links;
-
-	if ( $eddtb_file == EDDTB_PLUGIN_BASEDIR . '/edd-toolbar.php' ) {
-		$eddtb_links[] = '<a href="http://wordpress.org/extend/plugins/edd-toolbar/faq/" target="_new" title="' . __( 'FAQ', 'edd-toolbar' ) . '">' . __( 'FAQ', 'edd-toolbar' ) . '</a>';
-		$eddtb_links[] = '<a href="http://wordpress.org/tags/edd-toolbar?forum_id=10" target="_new" title="' . __( 'Support', 'edd-toolbar' ) . '">' . __( 'Support', 'edd-toolbar' ) . '</a>';
-		$eddtb_links[] = '<a href="' . __( 'http://genesisthemes.de/en/donate/', 'edd-toolbar' ) . '" target="_new" title="' . __( 'Donate', 'edd-toolbar' ) . '">' . __( 'Donate', 'edd-toolbar' ) . '</a>';
+	/** Include admin helper functions */
+	if ( is_admin() ) {
+		require_once( EDDTB_PLUGIN_DIR . '/includes/eddtb-admin.php' );
 	}
 
-	return $eddtb_links;
+	/** Add "Misc Settings Page" link to plugin page */
+	if ( is_admin() && current_user_can( 'manage_options' ) ) {
+		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ) , 'ddw_eddtb_settings_page_link' );
+	}
 }
-
-
-add_filter( 'edd_settings_misc', 'ddw_eddtb_add_settings' );
-/**
- * Adds the settings to the "Easy Digital Downloads > Settings > Misc" section
- *
- * @since 1.1
- */
-function ddw_eddtb_add_settings( $settings ) {
-
-	$eddtb_settings = array(
-		array(
-			'id' => 'eddtb_settings',
-			'name' => '<strong>' . __( 'Extension: Toolbar Settings', 'edd-toolbar' ) . '</strong>',
-			'desc' => __( 'Remove or add some sections', 'edd-toolbar' ),
-			'type' => 'header'
-		),
-		array(
-			'id' => 'eddtb_remove_resources',
-			'name' => __( 'Display of Resources section', 'edd-toolbar' ),
-			'desc' => __( 'Disable the Resources links section. (Default display: enabled)', 'edd-toolbar' ),
-			'type' => 'checkbox'
-		),
-		array(
-			'id' => 'eddtb_remove_translation_resources',
-			'name' => __( 'Display of Translations Resources section', 'edd-toolbar' ),
-			'desc' => __( 'Disable the Translations Resources links section. (Default display: enabled for all Non-English locales)', 'edd-toolbar' ),
-			'type' => 'checkbox'
-		)
-	);
-
-	return array_merge( $settings, $eddtb_settings );
-
-}  // end of function ddw_eddtb_add_settings
 
 
 add_action( 'admin_bar_menu', 'ddw_eddtb_toolbar_menu', 98 );
@@ -111,11 +83,11 @@ add_action( 'admin_bar_menu', 'ddw_eddtb_toolbar_menu', 98 );
  * 
  * @since 1.0
  *
- * @global mixed $wp_admin_bar, $edd_options
+ * @global mixed $wp_admin_bar, $locale, $edd_options, $eddtb_edd_name, $eddtb_edd_name_tooltip
  */
 function ddw_eddtb_toolbar_menu() {
 
-	global $wp_admin_bar, $edd_options;
+	global $wp_admin_bar, $locale, $edd_options, $eddtb_edd_name, $eddtb_edd_name_tooltip;
 
 	/**
 	 * Allows for filtering the general user role/capability to display main & sub-level items
@@ -332,6 +304,12 @@ function ddw_eddtb_toolbar_menu() {
 					'href'   => 'http://easydigitaldownloads.com/docs/section/usage/',
 					'meta'   => array( 'title' => __( 'Usage', 'edd-toolbar' ) )
 				),
+				'edddocssections-theming' => array(
+					'parent' => $edddocssections,
+					'title'  => __( 'Theming', 'edd-toolbar' ),
+					'href'   => 'http://easydigitaldownloads.com/docs/section/theming/',
+					'meta'   => array( 'title' => _x( 'Theming', 'Translators: For the tooltip', 'edd-toolbar' ) )
+				),
 				'edddocssections-devapi' => array(
 					'parent' => $edddocssections,
 					'title'  => __( 'Developer API', 'edd-toolbar' ),
@@ -470,10 +448,10 @@ function ddw_eddtb_toolbar_menu() {
 				'meta'   => array( 'target' => '', 'title' => __( 'Download Tags', 'edd-toolbar' ) )
 			);
 
-			// Get the current EDD "downloads" slug
+			/** Get the current EDD "downloads" slug */
 			$eddtb_downloads_slug = defined( 'EDD_SLUG' ) ? EDD_SLUG : 'downloads';
 
-			// Display links to frontend "Downloads Archive" page
+			/** Display links to frontend "Downloads Archive" page */
 			$menu_items['edddownloads-dlarchives'] = array(
 				'parent' => $edddownloads,
 				'title'  => __( 'Visit Downloads Archives', 'edd-toolbar' ),
@@ -534,12 +512,28 @@ function ddw_eddtb_toolbar_menu() {
 				'href'   => admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Emails', 'edd-toolbar' ) )
 			);
+			$menu_items['eddsettings-styles'] = array(
+				'parent' => $eddsettings,
+				'title'  => __( 'Styles', 'edd-toolbar' ),
+				'href'   => admin_url( 'edit.php?post_type=download&page=edd-settings&tab=styles' ),
+				'meta'   => array( 'target' => '', 'title' => __( 'Styles', 'edd-toolbar' ) )
+			);
 			$menu_items['eddsettings-other'] = array(
 				'parent' => $eddsettings,
 				'title'  => __( 'Misc.', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit.php?post_type=download&page=edd-settings&tab=misc' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Misc.', 'edd-toolbar' ) )
 			);
+
+			/** Add Ons/ Extenstions */
+			if ( ! defined( 'EDDTB_ADDONS_DISPLAY' ) ) {
+				$menu_items['eddaddons'] = array(
+					'parent' => $eddbar,
+					'title'  => __( 'Add Ons', 'edd-toolbar' ),
+					'href'   => admin_url( 'edit.php?post_type=download&page=edd-addons' ),
+					'meta'   => array( 'target' => '', 'title' => sprintf( _x( 'Add Ons - Extend %s', 'Translators: For the tooltip', 'edd-toolbar' ), $eddtb_edd_name_tooltip ) )
+				);
+			}  // end if add-ons constant check
 
 		} // end-if cap check
 
@@ -611,6 +605,15 @@ function ddw_eddtb_toolbar_menu() {
 	}  // end foreach menu items
 
 
+	/**
+	 * Action Hook 'eddtb_custom_main_items'
+	 * allows for hooking other main items in
+	 *
+	 * @since 1.2
+	 */
+	do_action( 'eddtb_custom_main_items' );
+
+
 	/** EDD Group: Main Entry */
 	$wp_admin_bar->add_group( array(
 		'parent' => $eddbar,
@@ -640,6 +643,15 @@ function ddw_eddtb_toolbar_menu() {
 		$wp_admin_bar->add_menu( $eddgroup_menu_item );
 
 	}  // end foreach EDD Group
+
+
+	/**
+	 * Action Hook 'eddtb_custom_group_items'
+	 * allows for hooking other EDD Group items in
+	 *
+	 * @since 1.2
+	 */
+	do_action( 'eddtb_custom_group_items' );
 
 }  // end of main function
 
