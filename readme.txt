@@ -4,7 +4,7 @@ Donate link: http://genesisthemes.de/en/donate/
 Tags: toolbar, adminbar, admin bar, easy digital downloads, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
