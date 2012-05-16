@@ -36,6 +36,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 * English (default) - always included
 * German - always included
 * .pot file (`edd-toolbar.pot`) for translators is also always included :)
+* Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 * *Your translation? - [Just send it in](http://genesisthemes.de/en/contact/)*
 
 [A plugin from deckerweb.de and GenesisThemes](http://genesisthemes.de/en/)
@@ -47,7 +48,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 * Or follow me on [+David Decker](http://deckerweb.de/gplus) on Google Plus ;-)
 
 = More =
-* [Also see my other plugins](http://genesisthemes.de/en/wp-plugins/) or see [my WordPress.org profile page](http://profiles.wordpress.org/users/daveshine/)
+* [Also see my other plugins](http://genesisthemes.de/en/wp-plugins/) or see [my WordPress.org profile page](http://profiles.wordpress.org/daveshine/)
 * Tip: [*GenesisFinder* - Find then create. Your Genesis Framework Search Engine.](http://genesisfinder.com/)
 
 == Installation ==
@@ -333,6 +334,13 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Changelog ==
 
+= 1.3 (2012-05-17) =
+* NEW: Added more official resources links (support & docs).
+* UPDATE: Improved behavior of constants for removing sections (or all), so that setting to "FALSE" removes stuff, and setting to "TRUE" displays stuff. (This does not affect existing behavior as explained in the FAQ but introduces ability to use the boolean "TRUE" to bring stuff back in favor of removing the code lines - great for testing purposes etc.)
+* UPDATE: Updated readme.txt file info, links & documentation.
+* UPDATE: Updated German translations and also the .pot file for all translators.
+* NEW: Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
+
 = 1.2 (2012-05-01) =
 * NEW: Added new official "Styles" and "Add Ons" settings links, plus a new Documentation resource link.
 * UPDATE: Moved all admin-only functions/code from main file to extra admin file which only loads within 'wp-admin', this way it's all  performance-improved! :)
@@ -360,6 +368,9 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Upgrade Notice ==
 
+= 1.3 =
+Several additions & improvements: Added new resources links. Some code tweaks & improvements. Updated .pot file for translators plus German translations.
+
 = 1.2 =
 Several changes & improvements: Performance/Code improvements. Added new settings links, also two new action hooks for custom items. Updated .pot file for translators plus German translations.
 
@@ -369,11 +380,21 @@ Several changes & improvements: Added plugin options to "Misc" settings in EDD. 
 = 1.0 =
 Just released into the wild.
 
+== Plugin Links ==
+* [Translations (GlotPress)](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
+* [User support forums](http://wordpress.org/tags/edd-toolbar?forum_id=10)
+* [Code snippets archive for customizing, GitHub Gist](https://gist.github.com/2392882)
+
+== Donate ==
+Enjoy using *Easy Digital Downloads Toolbar*? Please consider [making a small donation](http://genesisthemes.de/en/donate/) to support the project's continued development.
+
 == Translations ==
 
 * English - default, always included
 * German: Deutsch - immer dabei! [Download auch via deckerweb.de](http://deckerweb.de/material/sprachdateien/easy-digital-downloads-plugin/#edd-toolbar)
 * For custom and update-secure language files please upload them to `/wp-content/languages/edd-toolbar/` (just create this folder) - This enables you to use fully custom translations that won't be overridden on plugin updates. Also, complete custom English wording is possible with that, just use a language file like `edd-toolbar-en_US.mo/.po` to achieve that (for creating one see the following tools).
+
+**Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)**
 
 *Note:* All my plugins are internationalized/ translateable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful. For translating I recommend the awesome ["Codestyling Localization" plugin](http://wordpress.org/extend/plugins/codestyling-localization/) and for validating the ["Poedit Editor"](http://www.poedit.net/), which works fine on Windows, Mac and Linux.
 
