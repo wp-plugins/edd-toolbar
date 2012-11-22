@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Easy Digital Downloads Toolbar package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-11-22 16:53+0100\n"
+"PO-Revision-Date: 2012-11-22 20:13+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +38,7 @@ msgstr "Compra mas complementos por %s"
 #: includes/eddtb-admin.php:170
 #: includes/eddtb-admin.php:208
 msgid "EDD Toolbar"
-msgstr ""
+msgstr "EDD Toolbar"
 
 #: includes/eddtb-admin.php:231
 msgid "Suggest new resource items, themes or plugins for support"
@@ -73,8 +73,8 @@ msgid "Get even more EDD extensions"
 msgstr "Obtener más extensiones EDD"
 
 #: edd-toolbar.php:0
-msgid "1.4.0"
-msgstr "1.4.0"
+msgid "1.4.1"
+msgstr "1.4.1"
 
 #: edd-toolbar.php:362
 #: edd-toolbar.php:364

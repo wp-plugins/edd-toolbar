@@ -4,7 +4,7 @@ Donate link: http://genesisthemes.de/en/donate/
 Tags: toolbar, adminbar, admin bar, easy digital downloads, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -35,7 +35,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 = Localization =
 * English (default) - always included
 * German (de_DE) - always included
-* Spanish (es_ES) - user-submitted - 100% complete for v1.4.0
+* Spanish (es_ES) - user-submitted - 100% complete for v1.4.0/ v1.4.1
 * .pot file (`edd-toolbar.pot`) for translators is also always included :)
 * Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 * *Your translation? - [Just send it in](http://genesisthemes.de/en/contact/)*
@@ -364,6 +364,9 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Changelog ==
 
+= 1.4.1 (2012-11-22) =
+* BUGFIX: Fixed a syntax error. Sorry guys!
+
 = 1.4.0 (2012-11-22) =
 * UPDATE: Updated the toolbar icon to the latest Easy Digital Downloads logo. Created the same 10 more color variants from it like for the former logo (the old ones are still there and usable!).
 * NEW: Added support for official "EDD Commissions" extension (premium).
@@ -413,6 +416,9 @@ All the custom, branding and developer stuff code above can also be found as a G
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.1 =
+Several additions & improvements: Added Extensions support; updated resources links. Plus: added partial Spanish translations; some code tweaks & improvements. Updated .pot file for translators plus German translations.
 
 = 1.4.0 =
 Several additions & improvements: Added Extensions support; updated resources links. Plus: added partial Spanish translations; some code tweaks & improvements. Updated .pot file for translators plus German translations.

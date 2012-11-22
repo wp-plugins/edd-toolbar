@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Easy Digital Downloads Toolbar v1.4.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/edd-toolbar\n"
 "POT-Creation-Date: 2012-04-14 01:20+0200\n"
-"PO-Revision-Date: 2012-11-22 16:53+0100\n"
+"PO-Revision-Date: 2012-11-22 20:13+0100\n"
 "Last-Translator: David Decker <deckerweb.mobil@googlemail.com>\n"
 "Language-Team: DECKERWEB <deckerweb.mobil@googlemail.com>\n"
 "MIME-Version: 1.0\n"
@@ -615,8 +615,8 @@ msgstr "Weitere Auswahl an kostenpflichtigen und freien E.D.D. Erweiterungen/ Za
 #@ edd-toolbar
 #. translators: plugin header field 'Version'
 #: edd-toolbar.php:0
-msgid "1.4.0"
-msgstr "1.4.0"
+msgid "1.4.1"
+msgstr "1.4.1"
 
 #@ edd-toolbar
 #: edd-toolbar.php:362

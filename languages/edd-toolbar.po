@@ -67,7 +67,7 @@ msgid "Get even more EDD extensions"
 msgstr ""
 
 #: edd-toolbar.php:0
-msgid "1.4.0"
+msgid "1.4.1"
 msgstr ""
 
 #: edd-toolbar.php:362 edd-toolbar.php:364

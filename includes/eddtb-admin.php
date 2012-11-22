@@ -264,7 +264,7 @@ function ddw_eddtb_help_tab_content() {
 function ddw_eddtb_help_sidebar_content() {
 
 	$eddtb_help_sidebar = '<p><strong>' . __( 'More about the plugin author', 'edd-toolbar' ) . '</strong></p>' .
-					'<p>' . __( 'Social:', 'edd-toolbar' ) . '<br /><a href="http://twitter.com/deckerweb" target="_blank" title="@ Twitter">Twitter</a> | <a href="http://www.facebook.com/deckerweb.service" target="_blank" title="@ Facebook">Facebook</a> | <a href="http://deckerweb.de/gplus" target="_blank" title="@ Google+">Google+</a> | <a href="' . esc_url_raw( ddw_gpsp_plugin_get_data( 'AuthorURI' ) ) . '" target="_blank" title="@ deckerweb.de">deckerweb</a></p>' .
+					'<p>' . __( 'Social:', 'edd-toolbar' ) . '<br /><a href="http://twitter.com/deckerweb" target="_blank" title="@ Twitter">Twitter</a> | <a href="http://www.facebook.com/deckerweb.service" target="_blank" title="@ Facebook">Facebook</a> | <a href="http://deckerweb.de/gplus" target="_blank" title="@ Google+">Google+</a> | <a href="' . esc_url_raw( ddw_eddtb_plugin_get_data( 'AuthorURI' ) ) . '" target="_blank" title="@ deckerweb.de">deckerweb</a></p>' .
 					'<p><a href="' . esc_url_raw( EDDTB_URL_WPORG_PROFILE ) . '" target="_blank" title="@ WordPress.org">@ WordPress.org</a></p>';
 
 	return $eddtb_help_sidebar;
