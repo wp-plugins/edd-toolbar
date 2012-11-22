@@ -3,8 +3,8 @@ Contributors: daveshine, deckerweb
 Donate link: http://genesisthemes.de/en/donate/
 Tags: toolbar, adminbar, admin bar, easy digital downloads, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
-Tested up to: 3.4
-Stable tag: 1.3
+Tested up to: 3.5
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -18,15 +18,15 @@ This **small and lightweight plugin extension** just adds a lot [Easy Digital Do
 = General Features =
 * Free Extension for ["Easy Digital Downloads"](http://wordpress.org/extend/plugins/easy-digital-downloads/) - all plugin settings are hooked in!
 * Access your stuff from one place in the toolbar on backend and frontend, without much scrolling... in other words: manage your digital downloads even more easily :-)
-* Plugin options under "Misc" settings in "Easy Digital Downloads": you can deactivate the Resources links group. (since v1.1)
-* Alternate main Icon with 11 additional colored/alternate icons included :) (changeable via filters)
+* Plugin options under "Misc" settings in "Easy Digital Downloads": you can deactivate the Resources links group. (since v1.1.0)
+* Alternate main Icon with 22 additional colored/alternate icons included :) (changeable via filters)
 * Plus 4 filters included to change wording/tooltip and icon of the main item - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
 * For custom "branding" or special needs a few sections like the "Resource links group" could be hidden from displaying via your active theme/child theme - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
 * Supporting all official *Easy Digital Downloads* sites, so just the whole ecosystem for this plugin :)
 * Fully internationalized! Real-life tested and developed with international users in mind!
 * Fully WPML compatible!
 * Fully Multisite compatible, you can also network-enable it if ever needed (per site use is recommended).
-* Tested with WordPress versions 3.3.1, 3.3.2 and 3.4-beta1-3 - also in debug mode (no stuff there, ok? :)
+* Tested with WordPress versions 3.4 branch, 3.5 branch (and before with 3.3 branch) - also in debug mode (no stuff there, ok? :)
 * Link to downloadable German language packs - only displayed when German locales are active (de_DE, de_AT, de_CH, de_LU)
 * *NOTE:* I would be happy to add more language/locale specific resources and more useful third-party links - just contact me!
 
@@ -34,7 +34,8 @@ As the name suggests this plugin is **intended towards webmasters and administra
 
 = Localization =
 * English (default) - always included
-* German - always included
+* German (de_DE) - always included
+* Spanish (es_ES) - user-submitted - 100% complete for v1.4.0
 * .pot file (`edd-toolbar.pot`) for translators is also always included :)
 * Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 * *Your translation? - [Just send it in](http://genesisthemes.de/en/contact/)*
@@ -43,7 +44,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 
 = Feedback =
 * I am open for your suggestions and feedback - Thank you for using or trying out one of my plugins!
-* Drop me a line [@deckerweb](http://twitter.com/#!/deckerweb) on Twitter
+* Drop me a line [@deckerweb](http://twitter.com/deckerweb) on Twitter
 * Follow me on [my Facebook page](http://www.facebook.com/deckerweb.service)
 * Or follow me on [+David Decker](http://deckerweb.de/gplus) on Google Plus ;-)
 
@@ -53,7 +54,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 
 == Installation ==
 
-1. Upload the entire `edd-toolbar` folder to the `/wp-content/plugins/` directory
+1. Upload the entire `edd-toolbar` folder to the `/wp-content/plugins/` directory -- or just upload the ZIP package via 'Plugins > Add New > Upload' in your WP Admin
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Look at your toolbar / admin bar and enjoy using the new links there :)
 4. Go and manage your digital downloads even more easily :)
@@ -195,8 +196,28 @@ function custom_eddtb_capability_all() {
 **eddtb_filter_main_icon**
 
 * Default value: Easy Digital Downloads default logo graphic like in its official website
-* 11 Predefined helper functions for the 11 included colored/alternate icons, returning special colored icon values - the helper function always has this name: `__eddtb_colornamehere_icon()` this results in the following filters ready for usage:
+* 11 Predefined helper functions for the 22 included colored/alternate icons, returning special colored icon values - the helper function always has this name: `__eddtb_colornamehere_icon()` this results in the following filters ready for usage:
 `
+add_filter( 'eddtb_filter_main_icon', '__eddtb_blue2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_brown2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_gray2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_green2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_khaki2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_orange2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_pink2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_red2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_turquoise2_icon' );
+
+add_filter( 'eddtb_filter_main_icon', '__eddtb_yellow2_icon' );
+
 add_filter( 'eddtb_filter_main_icon', '__eddtb_blue_icon' );
 
 add_filter( 'eddtb_filter_main_icon', '__eddtb_brown_icon' );
@@ -319,29 +340,54 @@ function eddtb_add_custom_main_items() {
 }
 `
 
+**Final note:** I DON'T recommend to add customization code snippets to your theme's/ child theme's `functions.php` file! **Please use a functionality plugin or an MU-plugin instead!** This way you are then more independent from theme/ child theme changes etc. If you don't know how to create such a plugin yourself just use one of my recommended 'Code Snippets' plugins. Read & bookmark these Sites:
+
+* [**"What is a functionality plugin and how to create one?"**](http://wpcandy.com/teaches/how-to-create-a-functionality-plugin) - *blog post by WPCandy*
+* [**"Creating a custom functions plugin for end users"**](http://justintadlock.com/archives/2011/02/02/creating-a-custom-functions-plugin-for-end-users) - *blog post by Justin Tadlock*
+* DON'T hack your `functions.php` file: [Resource One](http://thomasgriffinmedia.com/custom-snippets-plugin/) - [Resource Two](http://thomasgriffinmedia.com/blog/2012/09/calling-on-the-wordpress-community/) *(both by Thomas Griffin Media)*
+* [**"Code Snippets"** plugin by Shea Bunge](http://wordpress.org/extend/plugins/code-snippets/) - also network wide!
+* [**"Code With WP Code Snippets"** plugin by Thomas Griffin](https://github.com/thomasgriffin/CWWP-Custom-Snippets) - Note: Plugin currently in development at GitHub.
+* [**"Toolbox Modules"** plugin by Sergej Müller](http://wordpress.org/extend/plugins/toolbox/) - see also his [plugin instructions](http://playground.ebiene.de/toolbox-wordpress-plugin/).
+
 All the custom, branding and developer stuff code above can also be found as a Gist on GitHub: https://gist.github.com/2392882 (you can also add your questions/ feedback there :)
 
 == Screenshots ==
 
-1. Easy Digital Downloads Toolbar in action - primary level (running with WordPress 3.3+ here)
-2. Easy Digital Downloads Toolbar in action - a second level - add new download (running with WordPress 3.3+ here)
-3. Easy Digital Downloads Toolbar in action - a second level - settings: payment gateways (running with WordPress 3.3+ here)
-4. Easy Digital Downloads Toolbar in action - a third level - resources: support forums (running with WordPress 3.3+ here)
-5. Easy Digital Downloads Toolbar in action - a third level - resources: documentation (running with WordPress 3.3+ here)
-6. Easy Digital Downloads Toolbar in action - a secondary level - resources: plugin headquarters & stuff (running with WordPress 3.3+ here)
-7. Easy Digital Downloads Toolbar in action - language specific links at the bottom - for German locales (running with WordPress 3.3+ here)
-8. Easy Digital Downloads Toolbar in action - additional plugin settings under "Misc" in EDD settings - new option since plugin version 1.1+
+1. Easy Digital Downloads Toolbar in action - primary level ([Click here for larger version of screenshot](https://www.dropbox.com/s/uxbaj6wp8zszaux/screenshot-1.png))
+2. Easy Digital Downloads Toolbar in action - a second level - add new download ([Click here for larger version of screenshot](https://www.dropbox.com/s/oqcf68fnz2j1q6u/screenshot-2.png))
+3. Easy Digital Downloads Toolbar in action - a second level - settings: payment gateways ([Click here for larger version of screenshot](https://www.dropbox.com/s/er1a5z5n5i2k98h/screenshot-3.png))
+4. Easy Digital Downloads Toolbar in action - a third level - resources: support forums ([Click here for larger version of screenshot](https://www.dropbox.com/s/0ol73zw9udpjetm/screenshot-4.png))
+5. Easy Digital Downloads Toolbar in action - a third level - resources: documentation ([Click here for larger version of screenshot](https://www.dropbox.com/s/ugshtpqy5ayt0pa/screenshot-5.png))
+6. Easy Digital Downloads Toolbar in action - a secondary level - resources: plugin headquarters & stuff ([Click here for larger version of screenshot](https://www.dropbox.com/s/j5q9g6px690h8c3/screenshot-6.png))
+7. Easy Digital Downloads Toolbar in action - language specific links at the bottom - for German locales ([Click here for larger version of screenshot](https://www.dropbox.com/s/dvkxaks5ac4f32q/screenshot-7.png))
+8. Easy Digital Downloads Toolbar in action - additional plugin settings under "Misc" in EDD settings - new option since plugin version 1.1+ ([Click here for larger version of screenshot](https://www.dropbox.com/s/1ps3woox10g7suh/screenshot-8.png))
 
 == Changelog ==
 
-= 1.3 (2012-05-17) =
+= 1.4.0 (2012-11-22) =
+* UPDATE: Updated the toolbar icon to the latest Easy Digital Downloads logo. Created the same 10 more color variants from it like for the former logo (the old ones are still there and usable!).
+* NEW: Added support for official "EDD Commissions" extension (premium).
+* NEW: Added support for official "EDD Software Licensing" extension (premium).
+* NEW: Added support for official "EDD Manual Purchases" extension (premium).
+* NEW: Added support for third-party extension "EDD Slider" (premium).
+* NEW: Added settings links for 'Reports > Export' as well as for new 'Taxes' module.
+* UPDATE: Updated all resources links to latest state. Also added a few new resource links for Support & Documentation.
+* UPDATE: Updated detection of 'Download' post type to work properly with change to prefixed ID of 'edd_download' -- by keeping full backwards compatibility for 'download'!
+* UPDATE: Improved and extended help tab system.
+* CODE: Minor code/documentation updates & improvements.
+* NEW: Added new user-submitted Spanish translations.
+* UPDATE: Updated German translations and also the .pot file for all translators.
+* UPDATE: Initiated new three digits versioning, starting with this version.
+* UPDATE: Moved screenshots to 'assets' folder in WP.org SVN to reduce plugin package size.
+
+= 1.3.0 (2012-05-17) =
 * NEW: Added more official resources links (support & docs).
 * UPDATE: Improved behavior of constants for removing sections (or all), so that setting to "FALSE" removes stuff, and setting to "TRUE" displays stuff. (This does not affect existing behavior as explained in the FAQ but introduces ability to use the boolean "TRUE" to bring stuff back in favor of removing the code lines - great for testing purposes etc.)
 * UPDATE: Updated readme.txt file info, links & documentation.
 * UPDATE: Updated German translations and also the .pot file for all translators.
 * NEW: Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 
-= 1.2 (2012-05-01) =
+= 1.2.0 (2012-05-01) =
 * NEW: Added new official "Styles" and "Add Ons" settings links, plus a new Documentation resource link.
 * UPDATE: Moved all admin-only functions/code from main file to extra admin file which only loads within 'wp-admin', this way it's all  performance-improved! :)
 * NEW: Added two action hooks for hooking custom menu items in -- `eddtb_custom_main_items` for the main section and `eddtb_custom_group_items` for the resource group section (See FAQ section here for more info on that).
@@ -350,7 +396,7 @@ All the custom, branding and developer stuff code above can also be found as a G
 * UPDATE: Updated German translations and also the .pot file for all translators.
 * UPDATE: Extended GPL License info in readme.txt as well as main plugin file.
 
-= 1.1 (2012-04-22) =
+= 1.1.0 (2012-04-22) =
 * NEW: Added two options to the "Easy Digital Downloads > Settings > Misc" page: to easily remove the Resources & Languages/Translations resources items from the toolbar menu per checkbox option.
 * NEW: Added link to "Downloads Archives" on frontend like: `http://yoursite.com/downloads/` to get quick access to your downlods listing. Note, also supports user-defined slug via `EDD_SLUG` constant (since EDD v1.0.3)!
 * NEW: Added "Translations" sub-forum link to resources.
@@ -363,26 +409,29 @@ All the custom, branding and developer stuff code above can also be found as a G
 * UPDATE: Updated German translations and also the .pot file for all translators!
 * NEW: Added banner image on WordPress.org for better plugin branding :)
 
-= 1.0 (2012-04-15) =
+= 1.0.0 (2012-04-15) =
 * Initial release
 
 == Upgrade Notice ==
 
-= 1.3 =
+= 1.4.0 =
+Several additions & improvements: Added Extensions support; updated resources links. Plus: added partial Spanish translations; some code tweaks & improvements. Updated .pot file for translators plus German translations.
+
+= 1.3.0 =
 Several additions & improvements: Added new resources links. Some code tweaks & improvements. Updated .pot file for translators plus German translations.
 
-= 1.2 =
+= 1.2.0 =
 Several changes & improvements: Performance/Code improvements. Added new settings links, also two new action hooks for custom items. Updated .pot file for translators plus German translations.
 
-= 1.1 =
+= 1.1.0 =
 Several changes & improvements: Added plugin options to "Misc" settings in EDD. Added more resource links, and restructered some. Updated documentation, screenshots, readme as well as .pot plus German translations.
 
-= 1.0 =
+= 1.0.0 =
 Just released into the wild.
 
 == Plugin Links ==
 * [Translations (GlotPress)](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
-* [User support forums](http://wordpress.org/tags/edd-toolbar?forum_id=10)
+* [User support forums](http://wordpress.org/support/plugin/edd-toolbar)
 * [Code snippets archive for customizing, GitHub Gist](https://gist.github.com/2392882)
 
 == Donate ==
@@ -391,10 +440,11 @@ Enjoy using *Easy Digital Downloads Toolbar*? Please consider [making a small do
 == Translations ==
 
 * English - default, always included
-* German: Deutsch - immer dabei! [Download auch via deckerweb.de](http://deckerweb.de/material/sprachdateien/easy-digital-downloads-plugin/#edd-toolbar)
+* German (de_DE): Deutsch - immer dabei! [Download auch via deckerweb.de](http://deckerweb.de/material/sprachdateien/easy-digital-downloads-plugin/#edd-toolbar)
+* Spanish (es_ES): Español - user-submitted
 * For custom and update-secure language files please upload them to `/wp-content/languages/edd-toolbar/` (just create this folder) - This enables you to use fully custom translations that won't be overridden on plugin updates. Also, complete custom English wording is possible with that, just use a language file like `edd-toolbar-en_US.mo/.po` to achieve that (for creating one see the following tools).
 
-**Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)**
+**Easy plugin translation platform with GlotPress tool:** [**Translate "Easy Digital Downloads Toolbar"...**](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 
 *Note:* All my plugins are internationalized/ translateable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful. For translating I recommend the awesome ["Codestyling Localization" plugin](http://wordpress.org/extend/plugins/codestyling-localization/) and for validating the ["Poedit Editor"](http://www.poedit.net/), which works fine on Windows, Mac and Linux.
 

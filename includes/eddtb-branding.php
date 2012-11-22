@@ -8,22 +8,22 @@
  * @copyright  Copyright 2012, David Decker - DECKERWEB
  * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
  * @link       http://genesisthemes.de/en/wp-plugins/edd-toolbar/
- * @link       http://twitter.com/#!/deckerweb
+ * @link       http://twitter.com/deckerweb
  *
- * @since 1.0
+ * @since 1.0.0
  */
 
 /**
  * Helper functions for returning a few popular roles/capabilities.
  *
- * @since 1.0
+ * @since 1.0.0
  *
  * @return role/capability
  */
 	/**
 	 * Helper function for returning 'administrator' role/capability.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return 'administrator' role
 	 */
@@ -35,7 +35,7 @@
 	/**
 	 * Helper function for returning 'editor' role/capability.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return 'editor' role
 	 */
@@ -47,7 +47,7 @@
 	/**
 	 * Helper function for returning 'manage_options' capability.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return 'manage_options' capability
 	 */
@@ -59,7 +59,7 @@
 	/**
 	 * Helper function for returning 'edit_theme_options' capability.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return 'edit_theme_options' capability
 	 */
@@ -71,7 +71,7 @@
 	/**
 	 * Helper function for returning 'install_plugins' capability.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return 'install_plugins' capability
 	 */
@@ -86,14 +86,14 @@
 /**
  * Helper functions for returning colored icons.
  *
- * @since 1.0
+ * @since 1.0.0
  *
  * @return colored icon image
  */
 	/**
 	 * Helper function for returning the blue icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return blue icon
 	 */
@@ -105,7 +105,7 @@
 	/**
 	 * Helper function for returning the brown icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return brown icon
 	 */
@@ -117,7 +117,7 @@
 	/**
 	 * Helper function for returning the gray icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return gray icon
 	 */
@@ -129,7 +129,7 @@
 	/**
 	 * Helper function for returning the green icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return green icon
 	 */
@@ -141,7 +141,7 @@
 	/**
 	 * Helper function for returning the khaki icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return khaki icon
 	 */
@@ -153,7 +153,7 @@
 	/**
 	 * Helper function for returning the orange icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return orange icon
 	 */
@@ -165,7 +165,7 @@
 	/**
 	 * Helper function for returning the pink icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return pink icon
 	 */
@@ -177,7 +177,7 @@
 	/**
 	 * Helper function for returning the red icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return red icon
 	 */
@@ -189,7 +189,7 @@
 	/**
 	 * Helper function for returning the turquoise icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return turquoise icon
 	 */
@@ -201,7 +201,7 @@
 	/**
 	 * Helper function for returning the yellow icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return yellow icon
 	 */
@@ -211,9 +211,129 @@
 	}
 
 	/**
+	 * Helper function for returning the blue2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return blue2 icon
+	 */
+	function __eddtb_blue2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-blue.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the brown2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return brown2 icon
+	 */
+	function __eddtb_brown2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-brown.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the gray2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return gray2 icon
+	 */
+	function __eddtb_gray2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-gray.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the green2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return green2 icon
+	 */
+	function __eddtb_green2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-green.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the khaki2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return khaki2 icon
+	 */
+	function __eddtb_khaki2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-khaki.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the orange2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return orange2 icon
+	 */
+	function __eddtb_orange2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-orange.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the pink2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return pink2 icon
+	 */
+	function __eddtb_pink2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-pink.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the red2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return red2 icon
+	 */
+	function __eddtb_red2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-red.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the turquoise2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return turquoise2 icon
+	 */
+	function __eddtb_turquoise2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-turquoise.png', dirname( __FILE__ ) );
+	}
+
+	/**
+	 * Helper function for returning the yellow2 icon.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return yellow2 icon
+	 */
+	function __eddtb_yellow2_icon() {
+
+		return plugins_url( 'images/icon-eddtb2-yellow.png', dirname( __FILE__ ) );
+	}
+
+	/**
 	 * Helper function for returning the alternate (left menu) icon.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return alternate icon
 	 */
@@ -225,7 +345,7 @@
 	/**
 	 * Helper function for returning a custom icon (icon-eddtb.png) from stylesheet/theme "images" folder.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return bptb custom icon
 	 */
@@ -240,14 +360,14 @@
 /**
  * Helper functions for returning icon class.
  *
- * @since 1.0
+ * @since 1.0.0
  *
  * @return icon class
  */
 	/**
 	 * Helper function for returning no icon class.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 *
 	 * @return int 0
 	 */
