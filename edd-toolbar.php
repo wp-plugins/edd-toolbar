@@ -11,7 +11,7 @@
  * Plugin Name: Easy Digital Downloads Toolbar
  * Plugin URI: http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * Description: This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
- * Version: 1.4.1
+ * Version: 1.4.2
  * Author: David Decker - DECKERWEB
  * Author URI: http://deckerweb.de/
  * License: GPLv2 or later
@@ -184,6 +184,7 @@ function ddw_eddtb_toolbar_menu() {
 			$edddocssections = $prefix . 'edddocssections';			// third level: docs sections
 		$eddsites = $prefix . 'eddsites';				// sub level: edd sites
 			$eddfeatures = $prefix . 'eddfeatures';				// third level: edd features
+			$eddsitesaccount = $prefix . 'eddsitesaccount';			// third level: edd account
 			$eddsitesextensions = $prefix . 'eddsitesextensions';		// third level: edd extensions
 		$edddownloads = $prefix . 'edddownloads';			// sub level: edd downloads
 		$eddpayments = $prefix . 'eddpayments';				// sub level: edd payments
@@ -425,6 +426,7 @@ function ddw_eddtb_toolbar_menu() {
 										$edddocssections,
 									$eddsites,
 										$eddfeatures,
+										$eddsitesaccount,
 										$eddsitesextensions,
 									$eddpayments,
 									$eddreports,

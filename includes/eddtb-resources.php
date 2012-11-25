@@ -270,14 +270,38 @@ $eddgroup_menu_items = array(
 	'eddfeatures' => array(
 		'parent' => $eddsites,
 		'title'  => __( 'Features', 'edd-toolbar' ),
-		'href'   => 'https://easydigitaldownloads.com/features/',
+		'href'   => 'https://easydigitaldownloads.com/edd-features/',
 		'meta'   => array( 'title' => __( 'Features', 'edd-toolbar' ) )
 	),
-	'eddfeatures-screens' => array(
-		'parent' => $eddfeatures,
-		'title'  => __( 'Screenshots', 'edd-toolbar' ),
-		'href'   => 'https://easydigitaldownloads.com/screenshots/',
-		'meta'   => array( 'title' => __( 'Screenshots', 'edd-toolbar' ) )
+		'eddfeatures-screens' => array(
+			'parent' => $eddfeatures,
+			'title'  => __( 'Screenshots', 'edd-toolbar' ),
+			'href'   => 'https://easydigitaldownloads.com/screenshots/',
+			'meta'   => array( 'title' => __( 'Screenshots', 'edd-toolbar' ) )
+		),
+		'eddfeatures-showcase' => array(
+			'parent' => $eddfeatures,
+			'title'  => __( 'Showcase', 'edd-toolbar' ),
+			'href'   => 'https://easydigitaldownloads.com/easy-digital-downloads-showcase/',
+			'meta'   => array( 'title' => __( 'Showcase', 'edd-toolbar' ) )
+		),
+	'eddsitesaccount' => array(
+		'parent' => $eddsites,
+		'title'  => __( 'My Account', 'edd-toolbar' ),
+		'href'   => 'https://easydigitaldownloads.com/your-account/',
+		'meta'   => array( 'title' => __( 'My Account', 'edd-toolbar' ) )
+	),
+		'eddsitesaccount-history' => array(
+			'parent' => $eddsitesaccount,
+			'title'  => __( 'Purchase History', 'edd-toolbar' ),
+			'href'   => 'https://easydigitaldownloads.com/your-account/purchase-history/',
+			'meta'   => array( 'title' => __( 'Purchase History', 'edd-toolbar' ) )
+		),
+	'eddsitesaffiliates' => array(
+		'parent' => $eddsites,
+		'title'  => __( 'Affiliates', 'edd-toolbar' ),
+		'href'   => 'https://easydigitaldownloads.com/affiliates/',
+		'meta'   => array( 'title' => __( 'Affiliates', 'edd-toolbar' ) )
 	),
 	'eddsitesextensions' => array(
 		'parent' => $eddsites,

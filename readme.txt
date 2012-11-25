@@ -1,10 +1,10 @@
 === Easy Digital Downloads Toolbar ===
 Contributors: daveshine, deckerweb
 Donate link: http://genesisthemes.de/en/donate/
-Tags: toolbar, adminbar, admin bar, easy digital downloads, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
+Tags: toolbar, adminbar, admin bar, easy digital downloads, edd, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -364,7 +364,14 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Changelog ==
 
+= 1.4.2 (2012-11-22) =
+* *Maintenance release*
+* UPDATE: Updated "Features" resource link.
+* NEW: Added new resources links for "Affiliates", "Account" plus "Purchase History".
+* UPDATE: Updated all existing translations plus the .pot file for all translators!
+
 = 1.4.1 (2012-11-22) =
+* *Maintenance release*
 * BUGFIX: Fixed a syntax error. Sorry guys!
 
 = 1.4.0 (2012-11-22) =
@@ -416,6 +423,9 @@ All the custom, branding and developer stuff code above can also be found as a G
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.2 =
+Maintenance release: Added new resources links, updated existing. Updated all existing translations plus the .pot file for all translators.
 
 = 1.4.1 =
 Several additions & improvements: Added Extensions support; updated resources links. Plus: added partial Spanish translations; some code tweaks & improvements. Updated .pot file for translators plus German translations.
