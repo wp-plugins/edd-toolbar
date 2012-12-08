@@ -4,7 +4,7 @@ Donate link: http://genesisthemes.de/en/donate/
 Tags: toolbar, adminbar, admin bar, easy digital downloads, edd, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -35,7 +35,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 = Localization =
 * English (default) - always included
 * German (de_DE) - always included
-* Spanish (es_ES) - user-submitted - 100% complete for v1.4.0/ v1.4.1
+* Spanish (es_ES) - user-submitted - 100% complete for v1.4.0 - v1.4.3
 * .pot file (`edd-toolbar.pot`) for translators is also always included :)
 * Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 * *Your translation? - [Just send it in](http://genesisthemes.de/en/contact/)*
@@ -364,6 +364,10 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Changelog ==
 
+= 1.4.3 (2012-12-08) =
+* *Maintenance release*
+* BUGFIX: Fixed two PHP notices introduced with v1.4.0. - Thanks to Pippin Williamson for reporting :).
+
 = 1.4.2 (2012-11-22) =
 * *Maintenance release*
 * UPDATE: Updated "Features" resource link.
@@ -423,6 +427,9 @@ All the custom, branding and developer stuff code above can also be found as a G
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.3 =
+Maintenance release: Fixed 2 PHP notices. Updated all existing translations plus the .pot file for all translators.
 
 = 1.4.2 =
 Maintenance release: Added new resources links, updated existing. Updated all existing translations plus the .pot file for all translators.

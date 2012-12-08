@@ -11,7 +11,7 @@
  * Plugin Name: Easy Digital Downloads Toolbar
  * Plugin URI: http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * Description: This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
- * Version: 1.4.2
+ * Version: 1.4.3
  * Author: David Decker - DECKERWEB
  * Author URI: http://deckerweb.de/
  * License: GPLv2 or later
@@ -147,6 +147,16 @@ function ddw_eddtb_toolbar_menu() {
 
 	global $wp_admin_bar, $locale, $edd_options, $eddtb_edd_name, $eddtb_edd_name_tooltip;
 
+	/** Get the proper 'Download' post type ID/tag */
+	if ( post_type_exists( 'edd_download' ) ) {
+		$eddtb_download_cpt = 'edd_download';
+	} elseif ( post_type_exists( 'download' ) ) {
+		$eddtb_download_cpt = 'download';
+	} else {
+		$eddtb_download_cpt = '';
+	}
+
+
 	/**
 	 * Allows for filtering the general user role/capability to display main & sub-level items
 	 *
@@ -244,13 +254,6 @@ function ddw_eddtb_toolbar_menu() {
 
 	/** Show these items only if Easy Digital Downloads plugin is actually installed */
 	if ( ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' ) ) || defined( 'EDD_PLUGIN_FILE' ) ) {
-
-		/** Get the proper 'Download' post type ID/tag */
-		if ( post_type_exists( 'edd_download' ) ) {
-			$eddtb_download_cpt = 'edd_download';
-		} elseif ( post_type_exists( 'download' ) ) {
-			$eddtb_download_cpt = 'download';
-		}
 
 		/** EDD main downloads section */
 		if ( current_user_can( 'edit_posts' ) ) {
@@ -458,7 +461,7 @@ function ddw_eddtb_toolbar_menu() {
 		$wp_admin_bar->add_menu( array(
 			'id'    => $eddbar,
 			'title' => $eddtb_main_item_title,
-			'href'  => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '' ),
+			'href'  => ( defined( 'EDD_PLUGIN_FILE' ) && EDD_PLUGIN_FILE ) ? admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '' ) : false,
 			'meta'  => array( 'class' => $eddtb_main_item_icon_display, 'title' => $eddtb_main_item_title_tooltip )
 		) );
 

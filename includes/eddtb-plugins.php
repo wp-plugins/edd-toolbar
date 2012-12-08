@@ -24,7 +24,7 @@ if ( defined( 'EDD_SL_PLUGIN_URL' ) && current_user_can( 'manage_options' ) ) {
 	$menu_items['eddao-softwarelicenses'] = array(
 		'parent' => $eddaddons,
 		'title'  => __( 'Software Licenses', 'edd-toolbar' ),
-		'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-licenses' ),
+		'href'   => ( defined( 'EDD_PLUGIN_FILE' ) && EDD_PLUGIN_FILE ) ? admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-licenses' ) : false,
 		'meta'   => array( 'target' => '', 'title' => __( 'Software Licenses', 'edd-toolbar' ) )
 	);
 
