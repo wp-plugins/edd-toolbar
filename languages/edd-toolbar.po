@@ -26,7 +26,7 @@ msgid "Affiliates"
 msgstr ""
 
 #: edd-toolbar.php:0
-msgid "1.4.3"
+msgid "1.4.4"
 msgstr ""
 
 #: edd-toolbar.php:322 edd-toolbar.php:324

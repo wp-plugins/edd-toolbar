@@ -11,7 +11,7 @@
  * Plugin Name: Easy Digital Downloads Toolbar
  * Plugin URI: http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * Description: This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
- * Version: 1.4.3
+ * Version: 1.4.4
  * Author: David Decker - DECKERWEB
  * Author URI: http://deckerweb.de/
  * License: GPLv2 or later
@@ -155,6 +155,20 @@ function ddw_eddtb_toolbar_menu() {
 	} else {
 		$eddtb_download_cpt = '';
 	}
+
+
+	/** Resources links EDD settings check*/
+	$eddtb_resources_check = 'default';
+
+	if ( ( ! isset( $edd_options['eddtb_remove_resources'] ) && ! isset( $edd_options['eddtb_remove_translation_resources'] ) )
+		|| ( isset( $edd_options['eddtb_remove_resources'] ) && ! isset( $edd_options['eddtb_remove_translation_resources'] ) )
+		|| ( ! isset( $edd_options['eddtb_remove_resources'] ) && isset( $edd_options['eddtb_remove_translation_resources'] ) )
+		
+	) {
+
+		$eddtb_resources_check = 'eddtb_resources_yes';
+
+	}  // end-if resources settings check
 
 
 	/**
@@ -397,7 +411,9 @@ function ddw_eddtb_toolbar_menu() {
 	} else {
 
 		/** If Easy Digital Downloads is not active, to avoid PHP notices */
-		$menu_items = $eddgroup_menu_items;
+		if ( 'eddtb_resources_yes' == $eddtb_resources_check && $eddgroup_menu_items ) {
+			$menu_items = $eddgroup_menu_items;
+		}
 
 		/** If Easy Digital Downloads is not active and no icon filter is active, then display no icon */
 		if ( ! has_filter( 'eddtb_filter_main_icon' ) ) {
@@ -418,7 +434,7 @@ function ddw_eddtb_toolbar_menu() {
 
 	/** Allow menu items to be filtered, but pass in parent menu item IDs */
 	$menu_items = (array) apply_filters( 'ddw_eddtb_menu_items', $menu_items,
-									$eddgroup_menu_items,
+									( 'eddtb_resources_yes' == $eddtb_resources_check ) ? $eddtb_resources_check : '',
 									$prefix,
 									$eddbar,
 										$eddsupport,
@@ -514,26 +530,34 @@ function ddw_eddtb_toolbar_menu() {
 
 
 	/** EDD Group: Loop through the group menu items */
-	foreach ( $eddgroup_menu_items as $id => $eddgroup_menu_item ) {
+	if ( 'eddtb_resources_yes' == $eddtb_resources_check ) {
+
+		foreach ( $eddgroup_menu_items as $id => $eddgroup_menu_item ) {
 		
-		/** EDD Group: Add in the item ID */
-		$eddgroup_menu_item['id'] = $prefix . $id;
+			/** EDD Group: Add in the item ID */
+			$eddgroup_menu_item['id'] = $prefix . $id;
 
-		/** EDD Group: Add meta target to each item where it's not already set, so links open in new window/tab */
-		if ( ! isset( $eddgroup_menu_item['meta']['target'] ) )		
-			$eddgroup_menu_item['meta']['target'] = '_blank';
+			/** EDD Group: Add meta target to each item where it's not already set, so links open in new window/tab */
+			if ( ! isset( $eddgroup_menu_item['meta']['target'] ) )		
+				$eddgroup_menu_item['meta']['target'] = '_blank';
 
-		/** EDD Group: Add class to links that open up in a new window/tab */
-		if ( '_blank' === $eddgroup_menu_item['meta']['target'] ) {
-			if ( ! isset( $eddgroup_menu_item['meta']['class'] ) )
-				$eddgroup_menu_item['meta']['class'] = '';
-			$eddgroup_menu_item['meta']['class'] .= $prefix . 'eddtb-new-tab';
-		}
+			/** EDD Group: Add class to links that open up in a new window/tab */
+			if ( '_blank' === $eddgroup_menu_item['meta']['target'] ) {
 
-		/** EDD Group: Add menu items */
-		$wp_admin_bar->add_menu( $eddgroup_menu_item );
+				if ( ! isset( $eddgroup_menu_item['meta']['class'] ) ) {
+					$eddgroup_menu_item['meta']['class'] = '';
+				}
 
-	}  // end foreach EDD Group
+				$eddgroup_menu_item['meta']['class'] .= $prefix . 'eddtb-new-tab';
+
+			}
+
+			/** EDD Group: Add menu items */
+			$wp_admin_bar->add_menu( $eddgroup_menu_item );
+
+		}  // end foreach EDD Group
+
+	}  // end-if resource links check
 
 
 	/**
