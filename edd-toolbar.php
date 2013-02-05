@@ -5,21 +5,21 @@
  *
  * @package   Easy Digital Downloads Toolbar
  * @author    David Decker
- * @link      http://twitter.com/deckerweb
- * @copyright Copyright 2012, David Decker - DECKERWEB
+ * @link      http://deckerweb.de/twitter
+ * @copyright Copyright (c) 2012-2013, David Decker - DECKERWEB
  *
  * Plugin Name: Easy Digital Downloads Toolbar
  * Plugin URI: http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * Description: This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
- * Version: 1.4.4
+ * Version: 1.5.0
  * Author: David Decker - DECKERWEB
  * Author URI: http://deckerweb.de/
- * License: GPLv2 or later
+ * License: GPL-2.0+
  * License URI: http://www.opensource.org/licenses/gpl-license.php
  * Text Domain: edd-toolbar
  * Domain Path: /languages/
  *
- * Copyright 2012 David Decker - DECKERWEB
+ * Copyright (c) 2012-2013 David Decker - DECKERWEB
  *
  *     This file is part of Easy Digital Downloads Toolbar,
  *     a plugin for WordPress.
@@ -105,6 +105,10 @@ function ddw_eddtb_init() {
 		define( 'EDDTB_TRANSLATIONS_DISPLAY', TRUE );
 	}
 
+	if ( ! defined( 'EDDTB_FILTER_STRING' ) ) {
+		define( 'EDDTB_FILTER_STRING', __( 'Filter: %s', 'edd-toolbar' ) );
+	}
+
 }  // end of function ddw_eddtb_init
 
 
@@ -155,6 +159,10 @@ function ddw_eddtb_toolbar_menu() {
 	} else {
 		$eddtb_download_cpt = '';
 	}
+
+
+	/** EDD version number for later use */
+	$edd_version_number = defined( 'EDD_VERSION' ) ? 'v' . EDD_VERSION : '';
 
 
 	/** Resources links EDD settings check*/
@@ -212,10 +220,17 @@ function ddw_eddtb_toolbar_menu() {
 			$eddsitesextensions = $prefix . 'eddsitesextensions';		// third level: edd extensions
 		$edddownloads = $prefix . 'edddownloads';			// sub level: edd downloads
 		$eddpayments = $prefix . 'eddpayments';				// sub level: edd payments
+		$edddiscounts = $prefix . 'edddiscounts';			// sub level: edd discounts
 		$eddreports = $prefix . 'eddreports';				// sub level: edd reports
+			$eddearnings = $prefix . 'eddearnings';				// sub level: edd earnings (group)
 		$eddsettings = $prefix . 'eddsettings';				// sub level: edd settings
 			$eddaddons = $prefix . 'eddaddons';				// third level: edd add-ons
+				$eddaosoftwarelicenses = $prefix . 'eddaosoftwarelicenses';	// third level: edd sl add-on
+				$eddaocommissions = $prefix . 'eddaocommissions';	// third level: edd commissions add-on
 				$eddaddonsinfo = $prefix . 'eddaddonsinfo';		// third level: edd add-ons info
+			$eddsettingsother = $prefix . 'eddsettingsother';	// third level: edd misc. settings
+			$eddspecials = $prefix . 'eddspecials';				// third level: edd specials (under settings)
+			$eddversioninfo = $prefix . 'eddversioninfo';		// third level: edd version info (about)
 		$eddgroup = $prefix . 'eddgroup';				// sub level: edd group (resources)
 
 
@@ -244,6 +259,7 @@ function ddw_eddtb_toolbar_menu() {
 
 	/** Display language specific links only for these locales: de_DE, de_AT, de_CH, de_LU */
 	if ( EDDTB_DE_DISPLAY && ! isset( $edd_options['eddtb_remove_translation_resources'] ) && ( get_locale() == 'de_DE' || get_locale() == 'de_AT' || get_locale() == 'de_CH' || get_locale() == 'de_LU' ) ) {
+
 		/** German EDD language packs */
 		$eddgroup_menu_items['languages-de'] = array(
 			'parent' => $eddgroup,
@@ -251,11 +267,15 @@ function ddw_eddtb_toolbar_menu() {
 			'href'   => 'http://deckerweb.de/material/sprachdateien/easy-digital-downloads-plugin/',
 			'meta'   => array( 'title' => __( 'German language files for Easy Digital Downloads Plugin and more EDD extensions', 'edd-toolbar' ) )
 		);
+
 	}  // end-if German locales
 
 
 	/** Translate EDD section - only display for non-English locales */
-	if ( EDDTB_TRANSLATIONS_DISPLAY && ! isset( $edd_options['eddtb_remove_translation_resources'] ) && ( empty( $locale ) || !( get_locale() == 'en_US' || get_locale() == 'en_GB' || get_locale() == 'en_NZ' || get_locale() == 'en' ) ) ) {
+	if ( EDDTB_TRANSLATIONS_DISPLAY && ! isset( $edd_options['eddtb_remove_translation_resources'] ) && ( empty( $locale )
+		|| !( get_locale() == 'en_US' || get_locale() == 'en_GB' || get_locale() == 'en_NZ' || get_locale() == 'en' ) )
+	) {
+
 		/** Translations Forum */
 		$eddgroup_menu_items['translations-forum'] = array(
 			'parent' => $eddgroup,
@@ -263,32 +283,41 @@ function ddw_eddtb_toolbar_menu() {
 			'href'   => 'https://easydigitaldownloads.com/support/forum/translations/',
 			'meta'   => array( 'title' => sprintf( _x( 'Translations Forum (%s Support Forum)', 'Translators: For the tooltip', 'edd-toolbar' ), $eddtb_edd_name ) )
 		);
+
 	}  // end-if translate EDD
 
 
 	/** Show these items only if Easy Digital Downloads plugin is actually installed */
-	if ( ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' ) ) || defined( 'EDD_PLUGIN_FILE' ) ) {
+	if ( ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' ) ) || defined( 'EDD_PLUGIN_FILE' )
+	) {
+
+		/** Set EDD active variable for later user */
+		$edd_active = 'edd_is_active';
 
 		/** EDD main downloads section */
 		if ( current_user_can( 'edit_posts' ) ) {
+
 			$menu_items['edddownloads'] = array(
 				'parent' => $eddbar,
 				'title'  => __( 'All Downloads', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'All Downloads', 'edd-toolbar' ) )
 			);
+
 			$menu_items['edddownloads-add'] = array(
 				'parent' => $edddownloads,
 				'title'  => __( 'Add new Download', 'edd-toolbar' ),
 				'href'   => admin_url( 'post-new.php?post_type=' . $eddtb_download_cpt . '' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Add new Download', 'edd-toolbar' ) )
 			);
+
 			$menu_items['edddownloads-categories'] = array(
 				'parent' => $edddownloads,
 				'title'  => __( 'Categories', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit-tags.php?taxonomy=download_category&post_type=' . $eddtb_download_cpt . '' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Download Categories', 'edd-toolbar' ) )
 			);
+
 			$menu_items['edddownloads-tags'] = array(
 				'parent' => $edddownloads,
 				'title'  => __( 'Tags', 'edd-toolbar' ),
@@ -306,6 +335,7 @@ function ddw_eddtb_toolbar_menu() {
 				'href'   => get_home_url() . '/' . $eddtb_downloads_slug . '/',
 				'meta'   => array( 'target' => '', 'title' => _x( 'Visit Downloads Archives on Website Frontend', 'Translators: For the tooltip', 'edd-toolbar' ) )
 			);
+
 		} // end-if cap check
 
 		/** EDD admin settings sections */
@@ -319,6 +349,34 @@ function ddw_eddtb_toolbar_menu() {
 				'meta'   => array( 'target' => '', 'title' => __( 'Payment History', 'edd-toolbar' ) )
 			);
 
+				$menu_items['eddpayments-completed'] = array(
+					'parent' => $eddpayments,
+					'title'  => sprintf( EDDTB_FILTER_STRING, __( 'Completed', 'edd-toolbar' ) ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-payment-history&status=publish' ),
+					'meta'   => array( 'target' => '', 'title' => sprintf( EDDTB_FILTER_STRING, __( 'Completed', 'edd-toolbar' ) ) )
+				);
+
+				$menu_items['eddpayments-pending'] = array(
+					'parent' => $eddpayments,
+					'title'  => sprintf( EDDTB_FILTER_STRING, __( 'Pending', 'edd-toolbar' ) ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-payment-history&status=pending' ),
+					'meta'   => array( 'target' => '', 'title' => sprintf( EDDTB_FILTER_STRING, __( 'Pending', 'edd-toolbar' ) ) )
+				);
+
+				$menu_items['eddpayments-refunded'] = array(
+					'parent' => $eddpayments,
+					'title'  => sprintf( EDDTB_FILTER_STRING, __( 'Refunded', 'edd-toolbar' ) ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-payment-history&status=refunded' ),
+					'meta'   => array( 'target' => '', 'title' => sprintf( EDDTB_FILTER_STRING, __( 'Refunded', 'edd-toolbar' ) ) )
+				);
+
+				$menu_items['eddpayments-failed'] = array(
+					'parent' => $eddpayments,
+					'title'  => sprintf( EDDTB_FILTER_STRING, __( 'Failed', 'edd-toolbar' ) ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-payment-history&status=failed' ),
+					'meta'   => array( 'target' => '', 'title' => sprintf( EDDTB_FILTER_STRING, __( 'Failed', 'edd-toolbar' ) ) )
+				);
+
 			/** Discount Codes */
 			$menu_items['edddiscounts'] = array(
 				'parent' => $eddbar,
@@ -327,6 +385,20 @@ function ddw_eddtb_toolbar_menu() {
 				'meta'   => array( 'target' => '', 'title' => __( 'Discount Codes', 'edd-toolbar' ) )
 			);
 
+				$menu_items['edddiscounts-filter-active'] = array(
+					'parent' => $edddiscounts,
+					'title'  => sprintf( EDDTB_FILTER_STRING, __( 'Active', 'edd-toolbar' ) ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-discounts&status=active' ),
+					'meta'   => array( 'target' => '', 'title' => sprintf( EDDTB_FILTER_STRING, __( 'Active', 'edd-toolbar' ) ) )
+				);
+
+				$menu_items['edddiscounts-filter-inactive'] = array(
+					'parent' => $edddiscounts,
+					'title'  => sprintf( EDDTB_FILTER_STRING, __( 'Inactive', 'edd-toolbar' ) ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-discounts&status=inactive' ),
+					'meta'   => array( 'target' => '', 'title' => sprintf( EDDTB_FILTER_STRING, __( 'Inactive', 'edd-toolbar' ) ) )
+				);
+
 			/** Reports */
 			$menu_items['eddreports'] = array(
 				'parent' => $eddbar,
@@ -334,12 +406,48 @@ function ddw_eddtb_toolbar_menu() {
 				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Reports', 'edd-toolbar' ) )
 			);
-			$menu_items['eddreports-export'] = array(
-				'parent' => $eddreports,
-				'title'  => __( 'PDF Export', 'edd-toolbar' ),
-				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports&tab=export' ),
-				'meta'   => array( 'target' => '', 'title' => __( 'PDF Export', 'edd-toolbar' ) )
-			);
+
+				$menu_items['eddearnings-earnings'] = array(
+					'parent' => $eddearnings,
+					'title'  => __( 'Earnings', 'edd-toolbar' ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports&view=earnings' ),
+					'meta'   => array( 'target' => '', 'title' => __( 'Earnings', 'edd-toolbar' ) )
+				);
+
+				$menu_items['eddearnings-downloads'] = array(
+					'parent' => $eddearnings,
+					'title'  => __( 'Downloads', 'edd-toolbar' ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports&view=downloads' ),
+					'meta'   => array( 'target' => '', 'title' => __( 'Downloads', 'edd-toolbar' ) )
+				);
+
+				$menu_items['eddearnings-customers'] = array(
+					'parent' => $eddearnings,
+					'title'  => __( 'Customers', 'edd-toolbar' ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports&view=customers' ),
+					'meta'   => array( 'target' => '', 'title' => __( 'Customers', 'edd-toolbar' ) )
+				);
+
+				$menu_items['eddearnings-taxes'] = array(
+					'parent' => $eddearnings,
+					'title'  => __( 'Taxes', 'edd-toolbar' ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports&view=taxes' ),
+					'meta'   => array( 'target' => '', 'title' => __( 'Taxes', 'edd-toolbar' ) )
+				);
+
+				$menu_items['eddreports-export'] = array(
+					'parent' => $eddreports,
+					'title'  => __( 'PDF &amp; CSV Export', 'edd-toolbar' ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports&tab=export' ),
+					'meta'   => array( 'target' => '', 'title' => __( 'PDF &amp; CSV Export', 'edd-toolbar' ) )
+				);
+
+				$menu_items['eddreports-logs'] = array(
+					'parent' => $eddreports,
+					'title'  => __( 'View Logs', 'edd-toolbar' ),
+					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-reports&tab=logs' ),
+					'meta'   => array( 'target' => '', 'title' => __( 'View Logs', 'edd-toolbar' ) )
+				);
 
 			/** Settings */
 			$menu_items['eddsettings'] = array(
@@ -348,24 +456,28 @@ function ddw_eddtb_toolbar_menu() {
 				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-settings' ),
 				'meta'   => array( 'target' => '', 'title' => _x( 'General Settings', 'Translators: For the tooltip', 'edd-toolbar' ) )
 			);
+
 			$menu_items['eddsettings-general'] = array(
 				'parent' => $eddsettings,
 				'title'  => __( 'General', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-settings&tab=general' ),
 				'meta'   => array( 'target' => '', 'title' => _x( 'General Settings', 'Translators: For the tooltip', 'edd-toolbar' ) )
 			);
+
 			$menu_items['eddsettings-paymentgateways'] = array(
 				'parent' => $eddsettings,
 				'title'  => __( 'Payment Gateways', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-settings&tab=gateways' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Payment Gateways', 'edd-toolbar' ) )
 			);
+
 			$menu_items['eddsettings-emails'] = array(
 				'parent' => $eddsettings,
 				'title'  => __( 'Emails', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-settings&tab=emails' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Emails', 'edd-toolbar' ) )
 			);
+
 			$menu_items['eddsettings-styles'] = array(
 				'parent' => $eddsettings,
 				'title'  => __( 'Styles', 'edd-toolbar' ),
@@ -383,27 +495,58 @@ function ddw_eddtb_toolbar_menu() {
 				);
 			}  // end-if taxes check
 
-			$menu_items['eddsettings-other'] = array(
+			$menu_items['eddsettingsother'] = array(
 				'parent' => $eddsettings,
 				'title'  => __( 'Misc.', 'edd-toolbar' ),
 				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-settings&tab=misc' ),
 				'meta'   => array( 'target' => '', 'title' => __( 'Misc.', 'edd-toolbar' ) )
 			);
 
+			$menu_items['eddsettingsother-toolbar'] = array(
+				'parent' => $eddsettingsother,
+				'title'  => __( 'Toolbar', 'edd-toolbar' ),
+				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-settings&tab=misc#edd-toolbar' ),
+				'meta'   => array( 'target' => '', 'title' => __( 'Toolbar', 'edd-toolbar' ) )
+			);
+
+			$menu_items['eddversioninfo'] = array(
+				'parent' => $eddspecials,
+				'title'  => $edd_version_number . ' ' . __( 'Version Info (About)', 'edd-toolbar' ),
+				'href'   => admin_url( 'index.php?page=edd-about' ),
+				'meta'   => array( 'target' => '', 'title' => $edd_version_number . ' ' . __( 'Version Info (About)', 'edd-toolbar' ) )
+			);
+
+				$menu_items['eddversioninfo-credits'] = array(
+					'parent' => $eddversioninfo,
+					'title'  => __( 'Contributors', 'edd-toolbar' ),
+					'href'   => admin_url( 'index.php?page=edd-credits' ),
+					'meta'   => array( 'target' => '', 'title' => __( 'Contributors', 'edd-toolbar' ) )
+				);
+
+			$menu_items['edd-systeminfo'] = array(
+				'parent' => $eddspecials,
+				'title'  => __( 'System Info (Debug)', 'edd-toolbar' ),
+				'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-system-info' ),
+				'meta'   => array( 'target' => '', 'title' => __( 'System Info (Debug)', 'edd-toolbar' ) )
+			);
+
 			/** Add Ons/ Extenstions */
 			if ( EDDTB_ADDONS_DISPLAY ) {
+
 				$menu_items['eddaddons'] = array(
 					'parent' => $eddbar,
 					'title'  => __( 'Add Ons', 'edd-toolbar' ),
 					'href'   => admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '&page=edd-addons' ),
 					'meta'   => array( 'target' => '', 'title' => sprintf( _x( 'Add Ons - Extend %s', 'Translators: For the tooltip', 'edd-toolbar' ), $eddtb_edd_name_tooltip ) )
 				);
+
 				$menu_items['eddaddons-more'] = array(
 					'parent' => $eddaddonsinfo,
 					'title'  => __( 'Buy more Add Ons', 'edd-toolbar' ),
 					'href'   => 'http://ddwb.me/6m',
 					'meta'   => array( 'title' => sprintf( _x( 'Buy more Add Ons - Extend %s', 'Translators: For the tooltip', 'edd-toolbar' ), $eddtb_edd_name_tooltip ) )
 				);
+
 			}  // end if add-ons constant check
 
 		} // end-if cap check
@@ -434,7 +577,7 @@ function ddw_eddtb_toolbar_menu() {
 
 	/** Allow menu items to be filtered, but pass in parent menu item IDs */
 	$menu_items = (array) apply_filters( 'ddw_eddtb_menu_items', $menu_items,
-									( 'eddtb_resources_yes' == $eddtb_resources_check ) ? $eddtb_resources_check : '',
+									( 'eddtb_resources_yes' == $eddtb_resources_check ) ? $eddgroup_menu_items : '',
 									$prefix,
 									$eddbar,
 										$eddsupport,
@@ -448,10 +591,17 @@ function ddw_eddtb_toolbar_menu() {
 										$eddsitesaccount,
 										$eddsitesextensions,
 									$eddpayments,
+									$edddiscounts,
 									$eddreports,
+										$eddearnings,
 									$eddsettings,
 										$eddaddons,
+										$eddaosoftwarelicenses,
+										$eddaocommissions,
 										$eddaddonsinfo,
+										$eddsettingsother,
+										$eddspecials,
+										$eddversioninfo,
 									$eddgroup
 	);  // end of array
 
@@ -480,6 +630,13 @@ function ddw_eddtb_toolbar_menu() {
 			'href'  => ( defined( 'EDD_PLUGIN_FILE' ) && EDD_PLUGIN_FILE ) ? admin_url( 'edit.php?post_type=' . $eddtb_download_cpt . '' ) : false,
 			'meta'  => array( 'class' => $eddtb_main_item_icon_display, 'title' => $eddtb_main_item_title_tooltip )
 		) );
+
+
+	/** EDD Reports - Earning etc. Items */
+	$wp_admin_bar->add_group( array(
+		'parent' => $eddreports,
+		'id'     => $eddearnings
+	) );
 
 
 	/** Loop through the menu items */
@@ -512,6 +669,13 @@ function ddw_eddtb_toolbar_menu() {
 	 * @since 1.2.0
 	 */
 	do_action( 'eddtb_custom_main_items' );
+
+
+	/** EDD Add-On Special Items Sub-Group under "Settings" */
+	$wp_admin_bar->add_group( array(
+		'parent' => $eddsettings,
+		'id'     => $eddspecials
+	) );
 
 
 	/** EDD Add-On Special Group: Main Entry */
@@ -567,6 +731,31 @@ function ddw_eddtb_toolbar_menu() {
 	 * @since 1.2.0
 	 */
 	do_action( 'eddtb_custom_group_items' );
+
+	/**
+	 * Add plugin "About" & "Credits" items to WordPress Logo area (as sub items).
+	 *
+	 * @since 1.5.0
+	 */ 
+	if ( defined( 'EDD_VERSION' ) ) {
+
+		$wp_admin_bar->add_menu( array(
+			'id'     => 'plugin-edd-about',
+			'parent' => 'wp-logo-default',
+			'title'  => __( 'Plugin: Easy Digital Downloads', 'edd-toolbar' ),
+			'href'   => admin_url( 'index.php?page=edd-about' ),
+			'meta'   => array( 'title' => _x( 'About Easy Digital Downloads - Version Info', 'Translators: for the tooltip', 'edd-toolbar' ) . ' ' . $edd_version_number )
+		) );
+
+		$wp_admin_bar->add_menu( array(
+			'id'     => 'plugin-edd-credits',
+			'parent' => 'plugin-edd-about',
+			'title'  => __( 'Contributors', 'edd-toolbar' ),
+			'href'   => admin_url( 'index.php?page=edd-credits' ),
+			'meta'   => array( 'title' => __( 'Contributors', 'edd-toolbar' ) )
+		) );
+
+	}  // end-if EDD active check
 
 }  // end of main function
 

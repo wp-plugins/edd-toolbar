@@ -3,22 +3,23 @@ Contributors: daveshine, deckerweb
 Donate link: http://genesisthemes.de/en/donate/
 Tags: toolbar, adminbar, admin bar, easy digital downloads, edd, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
-Tested up to: 3.5
-Stable tag: 1.4.4
-License: GPLv2 or later
+Tested up to: 3.5.1
+Stable tag: 1.5.0
+License: GPL-2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
 This plugin adds useful admin links and resources for the Easy Digital Downloads plugin to the WordPress Toolbar / Admin Bar.
 
 == Description ==
 
-= Have Quicker Access to Your Digital Downloads - Time Saver! =
-This **small and lightweight plugin extension** just adds a lot [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/) plugin related resources to your toolbar / admin bar. Also links to all setting/ tab pages of the plugin are added making life administrators a lot easier. So you might just switch from the fontend of your site to 'Payment History' or to the 'Add new Download' page etc.
+> #### Have Quicker Access to Your Digital Downloads - Time Saver!
+> This **small and lightweight plugin extension** just adds a lot [Easy Digital Downloads](http://wordpress.org/extend/plugins/easy-digital-downloads/) plugin related resources to your toolbar / admin bar. Also links to all setting/ tab pages of the plugin are added making life administrators a lot easier. So you might just switch from the fontend of your site to 'Payment History' or to the 'Add new Download' page etc.
 
 = General Features =
 * Free Extension for ["Easy Digital Downloads"](http://wordpress.org/extend/plugins/easy-digital-downloads/) - all plugin settings are hooked in!
 * Access your stuff from one place in the toolbar on backend and frontend, without much scrolling... in other words: manage your digital downloads even more easily :-)
 * Plugin options under "Misc" settings in "Easy Digital Downloads": you can deactivate the Resources links group. (since v1.1.0)
+* Official & third-party Extensions (add-ons) are also supported if they provide extra settings pages! :-)
 * Alternate main Icon with 22 additional colored/alternate icons included :) (changeable via filters)
 * Plus 4 filters included to change wording/tooltip and icon of the main item - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
 * For custom "branding" or special needs a few sections like the "Resource links group" could be hidden from displaying via your active theme/child theme - for more info [see FAQ section here](http://wordpress.org/extend/plugins/edd-toolbar/faq/)
@@ -364,6 +365,16 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Changelog ==
 
+= 1.5.0 (2013-02-06) =
+* NEW: Improved settings links support - added "Filter" sub links for *Payments*, *Coupons*, *Reports* plus a few add-ons.
+* NEW: Added link items for Version Info/ About, plus Contributors.
+* NEW: Added support for official "Easy Digital Downloads CSV Import" extension (free).
+* UPDATE: Extended support for official "EDD Software Licensing" extension (premium).
+* UPDATE: Extended support for official "EDD Commissions" extension (premium).
+* CODE: Minor code/documentation updates & improvements.
+* UPDATE: Improved help tab display together with EDD.
+* UPDATE: Updated all existing translations plus the .pot file for all translators!
+
 = 1.4.4 (2012-12-10) =
 * *Maintenance release*
 * BUGFIX: Fixed another three PHP notices introduced with v1.4.0. - Thanks to Joost de Valk for reporting :).
@@ -433,6 +444,9 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Upgrade Notice ==
 
+= 1.5.0 =
+Several additions & improvements: Added Extensions support; expanded lots of settings links; some code tweaks & improvements. Updated .pot file for translators plus all translations.
+
 = 1.4.4 =
 Maintenance release: Fixed another 3 PHP notices. Updated all existing translations plus the .pot file for all translators.
 
@@ -478,6 +492,13 @@ Enjoy using *Easy Digital Downloads Toolbar*? Please consider [making a small do
 **Easy plugin translation platform with GlotPress tool:** [**Translate "Easy Digital Downloads Toolbar"...**](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 
 *Note:* All my plugins are internationalized/ translateable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful. For translating I recommend the awesome ["Codestyling Localization" plugin](http://wordpress.org/extend/plugins/codestyling-localization/) and for validating the ["Poedit Editor"](http://www.poedit.net/), which works fine on Windows, Mac and Linux.
+
+== Currently Supported Extensions (Add-Ons) ==
+* Software Licenses (premium, by Pippin Williamson)
+* Commissions (premium, by Pippin Williamson)
+* Manual Purchases (premium, by Pippin Williamson)
+* EDD Slider (premium, by Captain Theme)
+* Easy Digital Downloads CSV Import (free, by Daniel Espinoza & Pippin Williamson)
 
 == Additional Info ==
 **Idea Behind / Philosophy:** Just a little leightweight plugin for all the Easy Digital Downloads plugin users out there to make their daily web admin life a bit easier. I'll try to add some plugin/extension support if it makes some sense in the future. So stay tuned :).

@@ -5,10 +5,10 @@
  * @package    Easy Digital Downloads Toolbar
  * @subpackage Branding
  * @author     David Decker - DECKERWEB
- * @copyright  Copyright 2012, David Decker - DECKERWEB
- * @license    http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @copyright  Copyright (c) 2012-2013, David Decker - DECKERWEB
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  * @link       http://genesisthemes.de/en/wp-plugins/edd-toolbar/
- * @link       http://twitter.com/deckerweb
+ * @link       http://deckerweb.de/twitter
  *
  * @since 1.0.0
  */
