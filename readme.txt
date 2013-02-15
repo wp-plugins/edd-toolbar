@@ -4,7 +4,7 @@ Donate link: http://genesisthemes.de/en/donate/
 Tags: toolbar, adminbar, admin bar, easy digital downloads, edd, digital downloads, downloads, e-downloads, administration, resources, links, deckerweb, ddwtoolbar
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPL-2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -36,7 +36,7 @@ As the name suggests this plugin is **intended towards webmasters and administra
 = Localization =
 * English (default) - always included
 * German (de_DE) - always included
-* Spanish (es_ES) - user-submitted - 100% complete for v1.4.0 - v1.4.4
+* Spanish (es_ES) - user-submitted - 82% complete for v1.5.1
 * .pot file (`edd-toolbar.pot`) for translators is also always included :)
 * Easy plugin translation platform with GlotPress tool: [Translate "Easy Digital Downloads Toolbar"...](http://translate.wpautobahn.com/projects/wordpress-plugins-deckerweb/edd-toolbar)
 * *Your translation? - [Just send it in](http://genesisthemes.de/en/contact/)*
@@ -169,6 +169,22 @@ add_filter( 'eddtb_filter_capability_all', '__eddtb_admin_only' );
  * `__eddtb_role_editor` -- returns `'editor'` role -- usage:
 `
 add_filter( 'eddtb_filter_capability_all', '__eddtb_role_editor' );
+`
+ * `__eddtb_role_shop_manager` -- returns `'shop_manager'` role -- usage:
+`
+add_filter( 'eddtb_filter_capability_all', '__eddtb_role_shop_manager' );
+`
+ * `__eddtb_role_shop_accountant` -- returns `'shop_accountant'` role -- usage:
+`
+add_filter( 'eddtb_filter_capability_all', '__eddtb_role_shop_accountant' );
+`
+ * `__eddtb_role_shop_worker` -- returns `'shop_worker'` role -- usage:
+`
+add_filter( 'eddtb_filter_capability_all', '__eddtb_role_shop_worker' );
+`
+ * `__eddtb_role_shop_vendor` -- returns `'shop_vendor'` role -- usage:
+`
+add_filter( 'eddtb_filter_capability_all', '__eddtb_role_shop_vendor' );
 `
  * `__eddtb_cap_manage_options` -- returns `'manage_options'` capability -- usage:
 `
@@ -365,6 +381,12 @@ All the custom, branding and developer stuff code above can also be found as a G
 
 == Changelog ==
 
+= 1.5.1 (2013-02-15) =
+* NEW: Added full support for newly added role & capability system within EDD v1.4.4+ -- this is now fully reflected within this toolbar plugin. However, it may not be fully backwards compatible for user roles other than "administrator". Therefore, another reason to always use the *latest versions* of EDD, this toolbar plugin and of course, WordPress itself! :)
+* UPDATE: Added new filter "Revoked" for "Payment History" items.
+* NEW: Added support for third-party Add-On "EDD Download Info" (free, by Sami Keijonen).
+* UPDATE: Updated all existing translations plus the .pot file for all translators!
+
 = 1.5.0 (2013-02-06) =
 * NEW: Improved settings links support - added "Filter" sub links for *Payments*, *Coupons*, *Reports* plus a few add-ons.
 * NEW: Added link items for Version Info/ About, plus Contributors.
@@ -443,6 +465,9 @@ All the custom, branding and developer stuff code above can also be found as a G
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+Several additions & improvements: Fully reflects EDD's user roles/capabilities that came with EDD 1.4.4+. Extended Add-On support. Updated .pot file for translators plus all translations.
 
 = 1.5.0 =
 Several additions & improvements: Added Extensions support; expanded lots of settings links; some code tweaks & improvements. Updated .pot file for translators plus all translations.

@@ -10,7 +10,7 @@
  * @link       http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * @link       http://deckerweb.de/twitter
  *
- * @since 1.4.0
+ * @since      1.4.0
  */
 
 /**
@@ -133,7 +133,7 @@ if ( defined( 'EDDSLIDER_PLUGIN_DIR' ) && ( current_user_can( 'manage_options' )
  *
  * @since 1.5.0
  */
-if ( defined( 'EDD_CSVIMPORT_FILE' ) && ( current_user_can( 'manage_options' ) ) ) {
+if ( defined( 'EDD_CSVIMPORT_FILE' ) && current_user_can( 'manage_options' ) ) {
 
 	/** Entry at "Add-Ons" section */
 	$menu_items['eddao-csvimport'] = array(
@@ -143,4 +143,24 @@ if ( defined( 'EDD_CSVIMPORT_FILE' ) && ( current_user_can( 'manage_options' ) )
 		'meta'   => array( 'target' => '', 'title' => __( 'CSV Product Import', 'edd-toolbar' ) )
 	);
 
-}  // end-if EDD Slider
+}  // end-if Easy Digital Downloads CSV Import
+
+
+/**
+ * Add-On: EDD Download Info (free, by Sami Keijonen)
+ *
+ * @since 1.5.1
+ */
+if ( class_exists( 'EDD_Download_Info' )
+	&& ( current_user_can( 'manage_product_terms' ) || current_user_can( 'manage_download_terms' ) )
+) {
+
+	/** Entry at "Taxonomies" section */
+	$menu_items['edddownloads-features-ao'] = array(
+		'parent' => $edddownloads,
+		'title'  => _x( 'Features', 'Translators: Taxonomy name', 'edd-toolbar' ),
+		'href'   => admin_url( 'edit-tags.php?taxonomy=edd_download_info_feature&post_type=' . $eddtb_download_cpt . '' ),
+		'meta'   => array( 'target' => '', 'title' => _x( 'Download Features', 'Translators: Taxonomy name tooltip', 'edd-toolbar' ) )
+	);
+
+}  // end-if EDD Download Info

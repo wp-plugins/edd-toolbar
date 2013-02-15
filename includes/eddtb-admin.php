@@ -10,7 +10,7 @@
  * @link       http://genesisthemes.de/en/wp-plugins/edd-toolbar/
  * @link       http://deckerweb.de/twitter
  *
- * @since 1.0.0
+ * @since      1.0.0
  */
 
 /**
@@ -40,7 +40,9 @@ add_filter( 'edd_settings_misc', 'ddw_eddtb_add_settings' );
 /**
  * Adds the settings to the "Easy Digital Downloads > Settings > Misc" section
  *
- * @since 1.1.0
+ * @since  1.1.0
+ *
+ * @return array Settings merged into EDD core settings array.
  */
 function ddw_eddtb_add_settings( $settings ) {
 
@@ -72,14 +74,14 @@ function ddw_eddtb_add_settings( $settings ) {
 
 
 /**
- * Add "Misc Settings Page" link to plugin page
+ * Add "Misc Settings Page" link to plugin page.
  *
- * @since 1.2.0
+ * @since  1.2.0
  *
  * @param  $eddtb_links
  * @param  $eddtb_settings_link
  *
- * @return strings settings link
+ * @return strings Settings link.
  */
 function ddw_eddtb_settings_page_link( $eddtb_links ) {
 
@@ -97,14 +99,14 @@ function ddw_eddtb_settings_page_link( $eddtb_links ) {
 
 add_filter( 'plugin_row_meta', 'ddw_eddtb_plugin_links', 10, 2 );
 /**
- * Add various support links to plugin page
+ * Add various support links to plugin page.
  *
- * @since 1.0.0
+ * @since  1.0.0
  *
  * @param  $eddtb_links
  * @param  $eddtb_file
  *
- * @return strings plugin links
+ * @return strings Plugin links.
  */
 function ddw_eddtb_plugin_links( $eddtb_links, $eddtb_file ) {
 
@@ -136,7 +138,7 @@ add_action( 'admin_init', 'ddw_eddtb_edd_load_help' );
 /**
  * Load plugin help tab on EDD admin pages.
  *
- * @since 1.4.0
+ * @since  1.4.0
  *
  * @global mixed $edd_settings_page, $edd_discounts_page, $edd_payments_page, $edd_reports_page, $edd_add_ons_page
  */
@@ -161,12 +163,12 @@ add_action( 'load-post-new.php', 'ddw_eddtb_edd_cpt_load_help', 15 );
 /**
  * Load plugin help tab on EDD's 'Download' CPT pages.
  *
- * @since 1.4.0
+ * @since  1.4.0
  *
- * @uses get_current_screen()
- * @uses WP_Screen::add_help_tab()
- * @uses WP_Screen::set_help_sidebar()
- * @uses ddw_eddtb_help_sidebar_content()
+ * @uses   get_current_screen()
+ * @uses   WP_Screen::add_help_tab()
+ * @uses   WP_Screen::set_help_sidebar()
+ * @uses   ddw_eddtb_help_sidebar_content()
  *
  * @global mixed $eddtb_edd_screen, $post
  */
@@ -201,11 +203,12 @@ function ddw_eddtb_edd_cpt_load_help() {
 /**
  * Setup plugin help tab.
  *
- * @since 1.4.0
+ * @since  1.4.0
  *
- * @uses get_current_screen()
- * @uses WP_Screen::add_help_tab()
- * @uses WP_Screen::set_help_sidebar()
+ * @uses   get_current_screen()
+ * @uses   WP_Screen::add_help_tab()
+ * @uses   WP_Screen::set_help_sidebar()
+ * @uses   ddw_eddtb_help_sidebar_content()
  *
  * @global mixed $eddtb_edd_screen
  */
@@ -246,8 +249,8 @@ function ddw_eddtb_edd_help() {
  *
  * @since 1.4.0
  *
- * @uses ddw_eddtb_plugin_get_data()
- * @uses ddw_eddtb_plugin_help_content_footer()
+ * @uses  ddw_eddtb_plugin_get_data()
+ * @uses  ddw_eddtb_plugin_help_content_footer()
  */
 function ddw_eddtb_help_tab_content() {
 
@@ -282,11 +285,11 @@ function ddw_eddtb_help_tab_content() {
 /**
  * Create and display plugin help tab content for "footer info" part.
  *
- * @since 1.5.0
+ * @since  1.5.0
  *
- * @uses ddw_eddtb_plugin_get_data()
+ * @uses   ddw_eddtb_plugin_get_data()
  *
- * @param $eddtb_footer_content
+ * @param  $eddtb_footer_content
  *
  * @return string HTML help content footer info.
  */
@@ -306,7 +309,7 @@ function ddw_eddtb_plugin_help_content_footer() {
  *
  * @since 1.4.0
  *
- * @uses ddw_eddtb_plugin_get_data()
+ * @uses  ddw_eddtb_plugin_get_data()
  */
 function ddw_eddtb_help_sidebar_content() {
 
